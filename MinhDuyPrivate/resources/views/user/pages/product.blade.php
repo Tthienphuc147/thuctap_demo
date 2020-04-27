@@ -33,6 +33,9 @@ Sản phẩm - Phuc Store
 						@foreach($hinh_anh_san_pham as $hasp)
 						<div class="lg-image">
 							<a class="popup-img venobox vbox-item" href="uploads/images/products/{{$hasp->ten}}" data-gall="myGallery">
+								@if ($san_pham->so_luong == 0)
+								<img src="/user/assets/images/soldout.png" alt="" class="soldout--image">
+								@endif
 								<img src="uploads/images/products/{{$hasp->ten}}" alt="{{$san_pham->mo_ta}}">
 							</a>
 						</div>
