@@ -128,6 +128,12 @@
             text-align: center;
             font-size: 13px;
         }
+        .soldout--image{
+            position: absolute;
+            background: #c7c2c224;
+            /* width: 11rem; */
+            top: 0px;
+        }
     </style>
 </head>
 <body>

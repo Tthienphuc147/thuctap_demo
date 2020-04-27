@@ -63,6 +63,14 @@ class Cart
 
 	//xóa nhiều
 	public function xoaHetMotSanPham($id){
+		$san_pham1 = DB::table('san_phams')->where('id','=',$id)->first();
+		$so_luong_hien_tai = $san_pham1->so_luong;
+				$so_luong_con_lai = $so_luong_hien_tai + $this->san_phams[$id]['so_luong'];
+				$san_pham1 = DB::table('san_phams')->where('id','=',$id)->update(
+						[
+								'so_luong' => $so_luong_con_lai
+						]
+		);
 		$this->tong_so_luong -= $this->san_phams[$id]['so_luong'];
 		$this->tong_gia -= $this->san_phams[$id]['gia_ban'];
 		unset($this->san_phams[$id]);

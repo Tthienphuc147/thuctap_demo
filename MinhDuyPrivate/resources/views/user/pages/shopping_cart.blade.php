@@ -43,7 +43,7 @@ Giỏ hàng - Phuc Store
 									<th class="li-product-price">Giá bán</th>
 									<th class="li-product-quantity">Số lượng</th>
 									<th class="li-product-subtotal">Thành tiền</th>
-									<th class="li-product-remove">Sửa / Xóa</th>
+									<th class="li-product-remove">Xóa</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -66,16 +66,17 @@ Giỏ hàng - Phuc Store
 
 									<td class="li-product-price"><span class="amount">{{number_format($item->gia_ban)}}₫</span></td>
 									<td class="quantity">
-										<div class="cart-plus-minus">
+										{{-- <div class="cart-plus-minus">
 											<input id="ip-so-luong-{{$item->id}}" onKeyPress="return khongNhapKyTu(event);" class="cart-plus-minus-box" value="{{$sl}}" type="text">
 											<div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
 											<div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-										</div>
+										</div> --}}
+										<span class="font-weight-bold">{{$sl}}</span>
 									</td>
 									<td class="product-subtotal"><span class="amount">
 									{{number_format($san_pham['gia_ban'])}}₫</span></td>
 									<td class="li-product-remove">
-										<a href="javascript:void(0)" onclick="suaSoLuongGioHang({{$item->id}})"><i class="fa fa-pencil-square-o"></i></a>
+										{{-- <a href="javascript:void(0)" onclick="suaSoLuongGioHang({{$item->id}})"><i class="fa fa-pencil-square-o"></i></a> --}}
 										<a href="xoa-nhieu-gio-hang/{{$item->id}}"><i class="fa fa-trash-o"></i></a>
 									</td>
 								</tr>
@@ -114,7 +115,7 @@ Giỏ hàng - Phuc Store
 								<th class="li-product-price">Giá bán</th>
 								<th class="li-product-quantity">Số lượng</th>
 								<th class="li-product-subtotal">Thành tiền</th>
-								<th class="li-product-remove">Sửa / Xóa</th>
+								<th class="li-product-remove">Xóa</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -148,5 +149,6 @@ Giỏ hàng - Phuc Store
 			return false;
 		}
 	}
+	
 </script>
 @endsection

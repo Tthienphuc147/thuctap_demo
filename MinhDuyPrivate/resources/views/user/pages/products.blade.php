@@ -15,6 +15,7 @@ Mọi sản phẩm - Phuc Store
 		</div>
 	</div>
 </div>
+
 <!-- Bắt đầu phần nội dung loại sản phẩm -->
 @if($toan_bo_san_pham != null)
 <div class="content-wraper pt-10 pb-10">
@@ -67,6 +68,9 @@ Mọi sản phẩm - Phuc Store
 												@foreach($share_sp_toan_bo_hinh_anh_chinh as $ssptbhac)
 												@if($ssptbhac->id_sp == $sptl->id)
 												<a href="san-pham/{{changeTitle($sptl->ten)}}-a{{$sptl->id}}.html">
+													@if ($sptl->so_luong == 0)
+													<img src="/user/assets/images/soldout.png" alt="" class="soldout--image">
+													@endif
 													<img src="uploads/images/products/{{$ssptbhac->ten}}" alt="{{$sptl->mo_ta}}">
 												</a>
 												@break
@@ -74,6 +78,9 @@ Mọi sản phẩm - Phuc Store
 												@endforeach
 												@else
 												<a href="san-pham/{{changeTitle($sptl->ten)}}-a{{$sptl->id}}.html">
+													@if ($sptl->so_luong == 0)
+													<img src="/user/assets/images/soldout.png" alt="" class="soldout--image">
+													@endif
 													<img src="https://via.placeholder.com/300x300" alt="{{$sptl->mo_ta}}">
 												</a>
 												@endif
