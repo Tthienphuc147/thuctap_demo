@@ -99,36 +99,6 @@
 
 					<!-- Begin Footer Block Area -->
 					<div class="col-lg-4">
-						<div class="footer-block">
-							<h3 class="footer-block-title">Theo dõi chúng tôi</h3>
-							<ul class="social-link">
-								<li class="twitter">
-									<a href="{{$all_share_sp_cai_dat_trang_chu->twitter}}" data-toggle="tooltip" target="_blank" title="Twitter">
-										<i class="fa fa-twitter"></i>
-									</a>
-								</li>
-								<li class="rss">
-									<a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
-										<i class="fa fa-rss"></i>
-									</a>
-								</li>
-								<li class="facebook">
-									<a href="{{$all_share_sp_cai_dat_trang_chu->facebook}}" data-toggle="tooltip" target="_blank" title="Facebook">
-										<i class="fa fa-facebook"></i>
-									</a>
-								</li>
-								<li class="youtube">
-									<a href="{{$all_share_sp_cai_dat_trang_chu->youtube}}" data-toggle="tooltip" target="_blank" title="Youtube">
-										<i class="fa fa-youtube"></i>
-									</a>
-								</li>
-								<li class="instagram">
-									<a href="{{$all_share_sp_cai_dat_trang_chu->instagram}}" data-toggle="tooltip" target="_blank" title="Instagram">
-										<i class="fa fa-instagram"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
 						<!-- Begin Footer Newsletter Area -->
 						<div class="footer-newsletter">
 							<h4>Đăng ký nhận thông báo</h4>

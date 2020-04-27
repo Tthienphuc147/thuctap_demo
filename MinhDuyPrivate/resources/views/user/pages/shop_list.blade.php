@@ -81,7 +81,7 @@ Loại sản phẩm - Phuc Store
 								<div class="row">
 									@if(count($san_pham_theo_loai) != 0)
 									@foreach($san_pham_theo_loai as $sptl)
-									<div class="col-lg-3 col-md-4 col-sm-6 mt-40">
+									<div class="col-lg-3 col-md-4 col-sm-6 mt-60">
 										<!-- single-product-wrap start -->
 										<div class="single-product-wrap">
 											<div class="product-image">

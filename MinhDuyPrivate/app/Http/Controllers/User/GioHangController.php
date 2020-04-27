@@ -31,7 +31,7 @@ class GioHangController extends Controller
 
 			$gio_hang_hien_thi = Session::get('gio_hang_hien_tai')->san_phams;
 			foreach ($gio_hang_hien_thi as $gh => $san_pham) {
-
+                $sl = $san_pham['so_luong'];
 				foreach($san_pham as $sp => $item) {
 					if($sp == 'san_pham'){
 						$hien_thi .= '<li>

@@ -228,7 +228,7 @@ Trang chủ - Phuc Store
 	<!-- Slider With Category Menu Area End Here -->
 
 	<!-- Begin Li's Static Banner Area -->
-	<div class="li-static-banner pt-20 pt-sm-30 pt-xs-30">
+	<div class="li-static-banner pt-20 pt-sm-20 pt-xs-30">
 		<div class="container">
 			<div class="row">
 				<!-- Begin Single Banner Area -->
@@ -264,78 +264,64 @@ Trang chủ - Phuc Store
 	<!-- Li's Static Banner Area End Here -->
 
 	<!-- Bắt đầu sản phẩm theo danh mục -->
-	<div class="product-area pt-30 pb-10">
+	<section class="product-area li-laptop-product li-laptop-product-2 pt-10 pb-20">
 		<div class="container">
-			<div class="row">
+			<div class="row pb-70">
+				<!-- Begin Li's Section Area -->
 				<div class="col-lg-12">
-					<div class="li-product-tab">
-						@if($all_share_danh_muc_san_pham != null)
-						<ul class="nav li-product-menu">
-							<?php $count = 0; ?>
-							@foreach($all_share_danh_muc_san_pham as $dmsp)
-							<li><a @if($count == 0) class="active" @endif data-toggle="tab" href="#danhmuc{{$dmsp->id}}"><span>{{$dmsp->ten}}</span></a></li>
-							<?php $count++; ?>
-							@endforeach
-						</ul>
-						@endif
+					<div class="li-section-title">
+						<h2>
+							<span>Điện thoại</span>
+						</h2>
+
 					</div>
-					<!-- Begin Li's Tab Menu Content Area -->
-				</div>
-			</div>
-			<div class="tab-content">
-				@if($all_share_danh_muc_san_pham != null)
-				<?php $count = 0; ?>
-				@foreach($all_share_danh_muc_san_pham as $dmsp)
-				<div id="danhmuc{{$dmsp->id}}" class="tab-pane @if($count == 0) active show @endif " role="tabpanel">
-					<div class="row pb-70">
+					<div class="row">
 						<div class="product-active owl-carousel">
 
-							@if(count($san_pham_theo_danh_muc) != 0)
-							@foreach($san_pham_theo_danh_muc as $sptdm)
-							@if($sptdm->id_danh_muc_sp == $dmsp->id)
+							@if(count($toan_bo_san_pham_dien_thoai) != 0)
+							@foreach($toan_bo_san_pham_dien_thoai as $tbspm)
 							<div class="col-lg-12">
 								<!-- Bắt đầu một sản phẩm theo danh mục -->
 								<div class="single-product-wrap">
 									<div class="product-image">
 										@if(count($share_sp_toan_bo_hinh_anh_chinh) != 0)
 										@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
-										@if($tbhasp->id_sp == $sptdm->id)
-										<a href="san-pham/{{changeTitle($sptdm->ten)}}-a{{$sptdm->id}}.html">
-											<img src="uploads/images/products/{{$tbhasp->ten}}" alt="{{$sptdm->mo_ta}}">
+										@if($tbhasp->id_sp == $tbspm->id)
+										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
+											<img src="uploads/images/products/{{$tbhasp->ten}}"">
 										</a>
 										@break
 										@endif
 										@endforeach
 										@else
-										<a href="javascript:void(0)">
-											<img src="https://via.placeholder.com/300x300" alt="{{$sptdm->mo_ta}}">
+										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
+											<img src="https://via.placeholder.com/300x300"">
 										</a>
 										@endif
-										@if($sptdm->moi == 1)
 										<span class="sticker">Mới</span>
-										@endif
 									</div>
 									<div class="product_desc">
 										<div class="product_desc_info">
-											<h4><a class="product_name" href="san-pham/{{changeTitle($sptdm->ten)}}-a{{$sptdm->id}}.html">{{$sptdm->ten}}</a></h4>
-											@if($sptdm->khuyen_mai != 0)
+											<h4><a class="product_name" href="single-product.html">{{$tbspm->ten}}</a></h4>
+											@if($tbspm->khuyen_mai != 0)
 											<div class="price-box">
-												<span class="new-price new-price-2">{{number_format($sptdm->gia_ban)}}₫</span>
-												<span class="old-price">{{number_format($sptdm->gia_goc)}}₫</span>
+												<span class="new-price new-price-2">{{number_format($tbspm->gia_ban)}}₫</span>
+												<span class="old-price">{{number_format($tbspm->gia_goc)}}₫</span>
 											</div>
 											@else
 											<div class="price-box">
-												<span class="new-price">{{number_format($sptdm->gia_goc)}}₫</span>
+												<span class="new-price">{{number_format($tbspm->gia_goc)}}₫</span>
 											</div>
 											@endif
 										</div>
 										<div class="add-actions">
 											<ul class="add-actions-link">
-                                                @if ($sptdm->so_luong == 0)
+                                                @if ($tbspm->so_luong == 0)
                                                 <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
                                                 @else
-                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$sptdm->id}})">Thêm giỏ hàng</a></li>
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspm->id}})">Thêm giỏ hàng</a></li>
                                                 @endif
+
 
 											</ul>
 										</div>
@@ -343,22 +329,166 @@ Trang chủ - Phuc Store
 								</div>
 								<!-- Kết thúc một sản phẩm theo danh mục -->
 							</div>
-
-							@endif
 							@endforeach
 							@endif
-
 
 						</div>
 					</div>
 				</div>
-				<?php $count++; ?>
-				@endforeach
-				@endif
-
+				<!-- Li's Section Area End Here -->
 			</div>
 		</div>
-	</div>
+    </section>
+    <section class="product-area li-laptop-product li-laptop-product-2 pt-10 pb-20">
+		<div class="container">
+			<div class="row pb-70">
+				<!-- Begin Li's Section Area -->
+				<div class="col-lg-12">
+					<div class="li-section-title">
+						<h2>
+							<span>Laptop</span>
+						</h2>
+
+					</div>
+					<div class="row">
+						<div class="product-active owl-carousel">
+
+							@if(count($toan_bo_san_pham_lap_top) != 0)
+							@foreach($toan_bo_san_pham_lap_top as $tbspm)
+							<div class="col-lg-12">
+								<!-- Bắt đầu một sản phẩm theo danh mục -->
+								<div class="single-product-wrap">
+									<div class="product-image">
+										@if(count($share_sp_toan_bo_hinh_anh_chinh) != 0)
+										@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
+										@if($tbhasp->id_sp == $tbspm->id)
+										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
+											<img src="uploads/images/products/{{$tbhasp->ten}}"">
+										</a>
+										@break
+										@endif
+										@endforeach
+										@else
+										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
+											<img src="https://via.placeholder.com/300x300"">
+										</a>
+										@endif
+										<span class="sticker">Mới</span>
+									</div>
+									<div class="product_desc">
+										<div class="product_desc_info">
+											<h4><a class="product_name" href="single-product.html">{{$tbspm->ten}}</a></h4>
+											@if($tbspm->khuyen_mai != 0)
+											<div class="price-box">
+												<span class="new-price new-price-2">{{number_format($tbspm->gia_ban)}}₫</span>
+												<span class="old-price">{{number_format($tbspm->gia_goc)}}₫</span>
+											</div>
+											@else
+											<div class="price-box">
+												<span class="new-price">{{number_format($tbspm->gia_goc)}}₫</span>
+											</div>
+											@endif
+										</div>
+										<div class="add-actions">
+											<ul class="add-actions-link">
+                                                @if ($tbspm->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspm->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
+
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- Kết thúc một sản phẩm theo danh mục -->
+							</div>
+							@endforeach
+							@endif
+
+						</div>
+					</div>
+				</div>
+				<!-- Li's Section Area End Here -->
+			</div>
+		</div>
+    </section>
+    <section class="product-area li-laptop-product li-laptop-product-2 pt-10 pb-20">
+		<div class="container">
+			<div class="row pb-70">
+				<!-- Begin Li's Section Area -->
+				<div class="col-lg-12">
+					<div class="li-section-title">
+						<h2>
+							<span>Tablet</span>
+						</h2>
+
+					</div>
+					<div class="row">
+						<div class="product-active owl-carousel">
+
+							@if(count($toan_bo_san_pham_tablet) != 0)
+							@foreach($toan_bo_san_pham_tablet as $tbspm)
+							<div class="col-lg-12">
+								<!-- Bắt đầu một sản phẩm theo danh mục -->
+								<div class="single-product-wrap">
+									<div class="product-image">
+										@if(count($share_sp_toan_bo_hinh_anh_chinh) != 0)
+										@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
+										@if($tbhasp->id_sp == $tbspm->id)
+										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
+											<img src="uploads/images/products/{{$tbhasp->ten}}"">
+										</a>
+										@break
+										@endif
+										@endforeach
+										@else
+										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
+											<img src="https://via.placeholder.com/300x300"">
+										</a>
+										@endif
+										<span class="sticker">Mới</span>
+									</div>
+									<div class="product_desc">
+										<div class="product_desc_info">
+											<h4><a class="product_name" href="single-product.html">{{$tbspm->ten}}</a></h4>
+											@if($tbspm->khuyen_mai != 0)
+											<div class="price-box">
+												<span class="new-price new-price-2">{{number_format($tbspm->gia_ban)}}₫</span>
+												<span class="old-price">{{number_format($tbspm->gia_goc)}}₫</span>
+											</div>
+											@else
+											<div class="price-box">
+												<span class="new-price">{{number_format($tbspm->gia_goc)}}₫</span>
+											</div>
+											@endif
+										</div>
+										<div class="add-actions">
+											<ul class="add-actions-link">
+                                                @if ($tbspm->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspm->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
+
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- Kết thúc một sản phẩm theo danh mục -->
+							</div>
+							@endforeach
+							@endif
+
+						</div>
+					</div>
+				</div>
+				<!-- Li's Section Area End Here -->
+			</div>
+		</div>
+	</section>
 	<!-- Kết thúc sản phẩm theo danh mục -->
 
 	<!-- Bắt đầu banner hình ảnh-->
@@ -402,16 +532,7 @@ Trang chủ - Phuc Store
 						<h2>
 							<span>Sản phẩm mới</span>
 						</h2>
-						@if($all_share_danh_muc_san_pham != null)
-						<ul class="li-sub-category-list">
-							<?php $count = 0; ?>
-							@foreach($all_share_danh_muc_san_pham as $dmsp)
 
-							<li class="active"><a href='danh-muc-san-pham/<?php echo changeTitle($dmsp->ten); ?>-a{{$dmsp->id}}.html'>{{$dmsp->ten}}</a></li>
-							<?php $count++; ?>
-							@endforeach
-						</ul>
-						@endif
 					</div>
 					<div class="row">
 						<div class="product-active owl-carousel">
@@ -426,14 +547,14 @@ Trang chủ - Phuc Store
 										@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
 										@if($tbhasp->id_sp == $tbspm->id)
 										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
-											<img src="uploads/images/products/{{$tbhasp->ten}}" alt="{{$sptdm->mo_ta}}">
+											<img src="uploads/images/products/{{$tbhasp->ten}}"">
 										</a>
 										@break
 										@endif
 										@endforeach
 										@else
 										<a href="san-pham/{{changeTitle($tbspm->ten)}}-a{{$tbspm->id}}.html">
-											<img src="https://via.placeholder.com/300x300" alt="{{$sptdm->mo_ta}}">
+											<img src="https://via.placeholder.com/300x300"">
 										</a>
 										@endif
 										<span class="sticker">Mới</span>
@@ -489,16 +610,6 @@ Trang chủ - Phuc Store
 						<h2>
 							<span>Sản phẩm khuyến mãi</span>
 						</h2>
-						@if($all_share_danh_muc_san_pham != null)
-						<ul class="li-sub-category-list">
-							<?php $count = 0; ?>
-							@foreach($all_share_danh_muc_san_pham as $dmsp)
-
-							<li class="active"><a href="danh-muc-san-pham/<?php echo changeTitle($dmsp->ten); ?>-a{{$dmsp->id}}.html">{{$dmsp->ten}}</a></li>
-							<?php $count++; ?>
-							@endforeach
-						</ul>
-						@endif
 					</div>
 					<div class="row">
 						<div class="product-active owl-carousel">
@@ -513,14 +624,14 @@ Trang chủ - Phuc Store
 										@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
 										@if($tbhasp->id_sp == $tbspkm->id)
 										<a href="san-pham/{{changeTitle($tbspkm->ten)}}-a{{$tbspkm->id}}.html">
-											<img src="uploads/images/products/{{$tbhasp->ten}}" alt="{{$sptdm->mo_ta}}">
+											<img src="uploads/images/products/{{$tbhasp->ten}}"">
 										</a>
 										@break
 										@endif
 										@endforeach
 										@else
 										<a href="javascript:void(0)">
-											<img src="https://via.placeholder.com/300x300" alt="{{$sptdm->mo_ta}}">
+											<img src="https://via.placeholder.com/300x300"">
 										</a>
 										@endif
 										@if($tbspkm->moi == 1)
@@ -581,21 +692,12 @@ Trang chủ - Phuc Store
 						<h2>
 							<span>Sản phẩm bán chạy</span>
 						</h2>
-						@if($all_share_danh_muc_san_pham != null)
-						<ul class="li-sub-category-list">
-							<?php $count = 0; ?>
-							@foreach($all_share_danh_muc_san_pham as $dmsp)
 
-							<li class="active"><a href="danh-muc-san-pham/<?php echo changeTitle($dmsp->ten); ?>-a{{$dmsp->id}}.html">{{$dmsp->ten}}</a></li>
-							<?php $count++; ?>
-							@endforeach
-						</ul>
-						@endif
 					</div>
 					<div class="row">
 						<div class="product-active owl-carousel">
 
-							@if(count($toan_bo_san_ban_chay) != 0)
+                            @if(count($toan_bo_san_ban_chay) != 0)
 							@foreach($toan_bo_san_ban_chay as $tbspbc)
 							<div class="col-lg-12">
 								<!-- Bắt đầu một sản phẩm theo danh mục -->
@@ -605,14 +707,14 @@ Trang chủ - Phuc Store
 										@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
 										@if($tbhasp->id_sp == $tbspbc->id)
 										<a href="san-pham/{{changeTitle($tbspbc->ten)}}-a{{$tbspbc->id}}.html">
-											<img src="uploads/images/products/{{$tbhasp->ten}}" alt="{{$sptdm->mo_ta}}">
+											<img src="uploads/images/products/{{$tbhasp->ten}}"">
 										</a>
 										@break
 										@endif
 										@endforeach
 										@else
 										<a href="javascript:void(0)">
-											<img src="https://via.placeholder.com/300x300" alt="{{$sptdm->mo_ta}}">
+											<img src="https://via.placeholder.com/300x300"">
 										</a>
 										@endif
 										<span class="sticker">Mới</span>
@@ -705,14 +807,14 @@ Trang chủ - Phuc Store
 											@foreach($share_sp_toan_bo_hinh_anh_chinh as $tbhasp)
 											@if($tbhasp->id_sp == $tbsp->id)
 											<a href="san-pham/{{changeTitle($tbsp->ten)}}-a{{$tbsp->id}}.html">
-												<img src="uploads/images/products/{{$tbhasp->ten}}" alt="{{$sptdm->mo_ta}}">
+												<img src="uploads/images/products/{{$tbhasp->ten}}"">
 											</a>
 											@break
 											@endif
 											@endforeach
 											@else
 											<a href="javascript:void(0)">
-												<img src="https://via.placeholder.com/300x300" alt="{{$sptdm->mo_ta}}">
+												<img src="https://via.placeholder.com/300x300"">
 											</a>
 											@endif
 										</div>
@@ -748,8 +850,6 @@ Trang chủ - Phuc Store
 			</div>
 		</div>
 	</div>
-	<!-- Kết thúc hiển thị sản phẩm theo nhóm-->
-
 </div>
 
 @endsection

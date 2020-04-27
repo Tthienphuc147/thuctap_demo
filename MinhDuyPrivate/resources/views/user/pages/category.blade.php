@@ -82,7 +82,7 @@ Loại sản phẩm - Phuc Store
 								<div class="row">
 									@if(count($tat_ca_san_pham_theo_danh_muc) != 0)
 									@foreach($tat_ca_san_pham_theo_danh_muc as $tcsptdm)
-									<div class="col-lg-4 col-md-4 col-sm-6 mt-40">
+									<div class="col-lg-4 col-md-4 col-sm-6 mt-110">
 										<!-- Bắt đầu menu sản phẩm -->
 										<div class="single-product-wrap">
 											<div class="product-image">
@@ -246,42 +246,7 @@ Loại sản phẩm - Phuc Store
 				<!--Kết thúc các danh mục liên quan  -->
 				@endif
 				<!--sidebar-categores-box start  -->
-				<div class="sidebar-categores-box">
-					<div class="sidebar-title">
-						<h2><center><b>Thể loại liên quan</b></center></h2>
-					</div>
-					@if(count($all_share_danh_muc_san_pham))
-					<!-- Bắt đầu thể loại sản phẩm liên quan -->
-					@foreach($all_share_danh_muc_san_pham as $asdmsp)
-					@if($danh_muc_theo_id->id == $asdmsp->id)
-					<div class="filter-sub-area">
-						<h5 class="filter-sub-titel">{{$asdmsp->ten}}</h5>
-						<div class="categori-checkbox">
-							<form action="#">
-								<ul>
-									@foreach($all_share_loai_san_pham as $aslsp)
-									@if($asdmsp->id == $aslsp->id_danh_muc_sp)
-									<?php $count_quantty = 0; ?>
-									@foreach($share_sp_toan_bo as $tcsp)
-									@if($tcsp->id_loai_sp == $aslsp->id)
-									<?php $count_quantty++; ?>
-									@endif
-									@endforeach
-									@if($count_quantty > 0)
-									<li><input type="checkbox" name="product-categori"><a href="loai-san-pham/{{changeTitle($aslsp->ten)}}-a{{$aslsp->id}}.html">{{$aslsp->ten}} ({{$count_quantty}})</a></li>
-									@endif
-									@endif
-									@endforeach
-								</ul>
-							</form>
-						</div>
-					</div>
-					@break
-					@endif
-					@endforeach
-					<!-- Kết thúc thể loại sản phẩm liên quan -->
-					@endif
-				</div>
+
 				<!--sidebar-categores-box end  -->
 				@if(count($all_share_tu_khoa) > 1)
 				<!-- Bắt đầu từ khóa thông dụng -->

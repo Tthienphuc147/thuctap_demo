@@ -59,7 +59,7 @@ Mọi sản phẩm - Phuc Store
                                 <div class="row">
                                     @if(count($toan_bo_san_pham) != 0)
                                     @foreach($toan_bo_san_pham as $sptl)
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mt-40">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 mt-60">
                                         <!-- single-product-wrap start -->
                                         <div class="single-product-wrap">
                                             <div class="product-image">

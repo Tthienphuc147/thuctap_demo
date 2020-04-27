@@ -6,11 +6,7 @@
 			<div class="row">
 				<!-- Begin Header Top Left Area -->
 				<div class="col-lg-3 col-md-4">
-					<div class="header-top-left">
-						<ul class="phone-wrap">
-							<li><b><span>Điện thoại: </span><a href="tel:+ {{preg_replace('/\s+/', '',$all_share_sp_cai_dat_trang_chu->dien_thoai)}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{$all_share_sp_cai_dat_trang_chu->dien_thoai}}</a></b></li>
-						</ul>
-					</div>
+
 				</div>
 				<!-- Header Top Left Area End Here -->
 				<!-- Begin Header Top Right Area -->
@@ -33,29 +29,6 @@
 								<div style="cursor: pointer;"><span onclick='location.href="dang-nhap"'><i class="fa fa-key" aria-hidden="true"></i> Đăng nhập</span></div>
 								@endif
 							</li>
-							<!-- Setting Area End Here -->
-							<!-- Begin Currency Area -->
-							<li>
-								<span class="currency-selector-wrapper">Tiền tệ :</span>
-								<div class="ht-currency-trigger"><span>VNĐ $</span></div>
-								<div class="currency ht-currency">
-									<ul class="ht-setting-list">
-										<li><a href="#">VNĐ $</a></li>
-									</ul>
-								</div>
-							</li>
-							<!-- Currency Area End Here -->
-							<!-- Begin Language Area -->
-							<li>
-								<span class="language-selector-wrapper">Ngôn ngữ :</span>
-								<div class="ht-language-trigger"><span>Việt Nam</span></div>
-								<div class="language ht-language">
-									<ul class="ht-setting-list">
-										<li><a href="#"><img src="user/assets/images/menu/flag-icon/vietnam.png" alt="">Việt Nam</a></li>
-									</ul>
-								</div>
-							</li>
-							<!-- Language Area End Here -->
 						</ul>
 					</div>
 				</div>
@@ -215,18 +188,17 @@
 										@endforeach
 										@endif
 									</ul>
-								</li>
-								<li class="dropdown-holder mr-4"><a href="toan-bo-dich-vu.html">Dịch vụ</a>
+                                </li>
+                                <li class="dropdown-holder ml-3 mr-3"><a href="toan-bo-tin-tuc.html">Dịch vụ</a>
 									<ul class="hb-dropdown">
-
-										@if($share_tt_danh_muc_dich_vu != null)
-										@foreach($share_tt_danh_muc_dich_vu as $sttdmdv)
-										<li class="sub-dropdown-holder"<a href="danh-muc-dich-vu/{{changeTitle($sttdmdv->ten)}}a{{$sttdmdv->id}}.html">{{$sttdmdv->ten}}</a>
+										@if($share_tt_danh_muc_dich_vu  != null)
+										@foreach($share_tt_danh_muc_dich_vu  as $sttdmdv)
+										<li class="sub-dropdown-holder"><a href="danh-muc-tin-tuc/{{changeTitle($sttdmdv->ten)}}a{{$sttdmdv->id}}.html">{{$sttdmdv->ten}}</a>
 											<ul class="hb-dropdown hb-sub-dropdown">
 												@if($share_tt_loai_dich_vu != null)
 												@foreach($share_tt_loai_dich_vu as $sttldv)
 												@if($sttldv->id_danh_muc_dich_vu == $sttdmdv->id)
-												<li><a href="loai-dich-vu/{{changeTitle($sttldv->ten)}}a{{$sttldv->id}}.html">{{$sttldv->ten}}</a></li>
+												<li><a href="loai-tin-tuc/{{changeTitle($sttdmdv->ten)}}a{{$sttdmdv->id}}.html">{{$sttdmdv->ten}}</a></li>
 												@endif
 												@endforeach
 												@endif
@@ -236,6 +208,7 @@
 										@endif
 									</ul>
 								</li>
+
 								<li><a href="thong-tin.html">Thông tin</a></li>
 								<li class="ml-2"><a href="lien-he.html">Liên hệ</a></li>
 							</ul>

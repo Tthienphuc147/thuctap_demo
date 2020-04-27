@@ -86,7 +86,9 @@ a:hover {
 .img-full {
 		width: 100%;
 		overflow: hidden;
-		display: block;
+        display: block;
+        height: 20rem;
+        object-fit: cover;
 }
 a:focus,
 a:hover {
@@ -2204,19 +2206,19 @@ textarea:focus {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 .product-image > span.sticker {
-	background: #0363cd;
-	border-radius: 100%;
-	color: #fff;
-	right: 15px;
-	position: absolute;
-	top: 20px;
-	z-index: 99;
-	height: 40px;
-	width: 40px;
-	line-height: 40px;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 11px;
+    background: #0363cd;
+    border-radius: 100%;
+    color: #fff;
+    position: absolute;
+    top: -9px;
+    right: -11px;
+    z-index: 99;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 11px;
 }
 .product-review {
 	border-bottom: 1px solid #ebebeb;
