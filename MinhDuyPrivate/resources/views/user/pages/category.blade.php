@@ -36,7 +36,7 @@ Loại sản phẩm - Phuc Store
 							<!-- shop-item-filter-list start -->
 							<ul class="nav shop-item-filter-list" role="tablist">
 								<li class="active" role="presentation"><a aria-selected="true" class="active show" data-toggle="tab" role="tab" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
-								<li role="presentation"><a data-toggle="tab" role="tab" aria-controls="list-view" href="#list-view"><i class="fa fa-th-list"></i></a></li>
+
 							</ul>
 							<!-- shop-item-filter-list end -->
 						</div>
@@ -89,14 +89,20 @@ Loại sản phẩm - Phuc Store
 												@if(count($share_sp_toan_bo_hinh_anh_chinh) != 0)
 												@foreach($share_sp_toan_bo_hinh_anh_chinh as $ssptbhac)
 												@if($ssptbhac->id_sp == $tcsptdm->id)
-												<a href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">
+                                                <a href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">
+                                                    @if ($tcsptdm->so_luong == 0)
+                                                    <img src="/user/assets/images/soldout.png" alt="" class="soldout--image">
+                                                    @endif
 													<img src="uploads/images/products/{{$ssptbhac->ten}}" alt="{{$tcsptdm->mo_ta}}">
 												</a>
 												@break
 												@endif
 												@endforeach
 												@else
-												<a href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">
+                                                <a href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">
+                                                    @if ($tcsptdm->so_luong == 0)
+                                                    <img src="/user/assets/images/soldout.png" alt="" class="soldout--image">
+                                                    @endif
 													<img src="https://via.placeholder.com/300x300" alt="{{$tcsptdm->mo_ta}}">
 												</a>
 												@endif
@@ -122,9 +128,11 @@ Loại sản phẩm - Phuc Store
 												</div>
 												<div class="add-actions">
 													<ul class="add-actions-link">
-														<li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tcsptdm->id}})">Thêm giỏ hàng</a></li>
-														<li><a class="links-details" href="javascript:void(0)" onclick="themSpYeuThich({{$tcsptdm->id}})"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#xemnhanhsanpham{{$tcsptdm->id}}"><i class="fa fa-eye"></i></a></li>
+                                                        @if ($tcsptdm->so_luong == 0)
+                                                        <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                        @else
+                                                        <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tcsptdm->id}})">Thêm giỏ hàng</a></li>
+                                                        @endif
 													</ul>
 												</div>
 											</div>
@@ -152,82 +160,7 @@ Loại sản phẩm - Phuc Store
 								</div>
 							</div>
 						</div>
-						<div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
-							<div class="row">
-								<div class="col">
-									@if(count($tat_ca_san_pham_theo_danh_muc) != 0)
-									@foreach($tat_ca_san_pham_theo_danh_muc as $tcsptdm)
-									<div class="row product-layout-list">
-										<div class="col-lg-3 col-md-5 ">
-											<div class="product-image">
-												@if(count($share_sp_toan_bo_hinh_anh_chinh) != 0)
-												@foreach($share_sp_toan_bo_hinh_anh_chinh as $ssptbhac)
-												@if($ssptbhac->id_sp == $tcsptdm->id)
-												<a href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">
-													<img src="uploads/images/products/{{$ssptbhac->ten}}" alt="{{$tcsptdm->mo_ta}}">
-												</a>
-												@break
-												@endif
-												@endforeach
-												@else
-												<a href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">
-													<img src="https://via.placeholder.com/300x300" alt="{{$tcsptdm->mo_ta}}">
-												</a>
-												@endif
-												@if($tcsptdm->moi == 1)
-												<span class="sticker">Mới</span>
-												@endif
-											</div>
-										</div>
-										<div class="col-lg-5 col-md-7">
-											<div class="product_desc">
-												<div class="product_desc_info">
-													<h4><a class="product_name" href="san-pham/{{changeTitle($tcsptdm->ten)}}-a{{$tcsptdm->id}}.html">{{$tcsptdm->ten}}</a></h4>
-													@if($tcsptdm->khuyen_mai != 0)
-													<div class="price-box">
-														<span class="new-price new-price-2">{{number_format($tcsptdm->gia_ban)}}₫</span>
-														<span class="old-price">{{number_format($tcsptdm->gia_goc)}}₫</span>
-													</div>
-													@else
-													<div class="price-box">
-														<span class="new-price">{{number_format($tcsptdm->gia_goc)}}₫</span>
-													</div>
-													@endif
-													<p><?php echo limitStrlen($tcsptdm->mo_ta, 300); ?></p>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-4">
-											<div class="shop-add-action mb-xs-30">
-												<ul class="add-actions-link">
-													<li class="add-cart"><a href="javascript:void(0)" onclick="themGioHang({{$tcsptdm->id}})">Thêm giỏ hàng</a></li>
-													<li class="wishlist"><a class="view-list-product" href="javascript:void(0)" onclick="themSpYeuThich({{$tcsptdm->id}})"><i class="fa fa-heart-o"></i>Thêm yêu thích</a></li>
-													<li><a class="quick-view view-list-product" data-toggle="modal" data-target="#xemnhanhsanpham{{$tcsptdm->id}}" href="#"><i class="fa fa-eye"></i>Quick view</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									@endforeach
-									@else
-									<div class="col-md-12">
-										<div class="error404-area pt-30 pb-60">
-											<div class="container">
-												<div class="error-wrapper text-center ptb-50 pt-xs-20">
-													<div class="error-text">
-														<h2>Không tìm thấy sản phẩm nào</h2>
-														<p>Xin lỗi! Không tìm thấy sản phẩm nào phù hợp với yêu cầu của bạn.</p>
-													</div>
-													<div class="error-button">
-														<a href="trang-chu.html">Quay lại trang chủ</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									@endif
-								</div>
-							</div>
-						</div>
+
 
 						@if ($tat_ca_san_pham_theo_danh_muc->lastPage() > 1)
 						<div class="paginatoin-area">
@@ -389,5 +322,6 @@ Loại sản phẩm - Phuc Store
 			window.location.href = 'loc-danh-muc-san-pham/'+ten_danh_muc+'-a'+id_danh_muc+'b'+status+'.html';
 		}
 	}
+
 </script>
 @endsection

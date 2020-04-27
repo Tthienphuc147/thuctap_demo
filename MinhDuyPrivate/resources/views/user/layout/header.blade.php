@@ -97,24 +97,6 @@
 					<!-- Begin Header Middle Right Area -->
 					<div class="header-middle-right">
 						<ul class="hm-menu">
-							<!-- Begin Header Middle Wishlist Area -->
-							@if(Session::has('yeu_thich_hien_tai'))
-							<?php $yeu_thich = Session::get('yeu_thich_hien_tai')->san_phams; ?>
-							<li class="hm-wishlist" id="kq-yeu-thich">
-								<a href="danh-sach-yeu-thich.html">
-									<span class="cart-item-count wishlist-item-count">{{count($yeu_thich)}}</span>
-									<i class="fa fa-heart-o"></i>
-								</a>
-							</li>
-							@else
-							<li class="hm-wishlist" id="kq-yeu-thich">
-								<a href="danh-sach-yeu-thich.html">
-									<span class="cart-item-count wishlist-item-count">0</span>
-									<i class="fa fa-heart-o"></i>
-								</a>
-							</li>
-							@endif
-							<!-- Header Middle Wishlist Area End Here -->
 							<!-- Bắt đầu giỏ hàng -->
 							<li class="hm-minicart">
 								<div class="hm-minicart-trigger">

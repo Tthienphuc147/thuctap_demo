@@ -331,9 +331,12 @@ Trang chủ - Phuc Store
 										</div>
 										<div class="add-actions">
 											<ul class="add-actions-link">
-												<li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$sptdm->id}})">Thêm giỏ hàng</a></li>
-												<li><a class="links-details" href="javascript:void(0)" onclick="themSpYeuThich({{$sptdm->id}})"><i class="fa fa-heart-o"></i></a></li>
-												<li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#xemnhanhsanpham{{$sptdm->id}}"><i class="fa fa-eye"></i></a></li>
+                                                @if ($sptdm->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$sptdm->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
+
 											</ul>
 										</div>
 									</div>
@@ -451,9 +454,13 @@ Trang chủ - Phuc Store
 										</div>
 										<div class="add-actions">
 											<ul class="add-actions-link">
-												<li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspm->id}})">Thêm giỏ hàng</a></li>
-												<li><a class="links-details" href="javascript:void(0)" onclick="themSpYeuThich({{$tbspm->id}})"><i class="fa fa-heart-o"></i></a></li>
-												<li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#xemnhanhsanpham{{$tbspm->id}}"><i class="fa fa-eye"></i></a></li>
+                                                @if ($tbspm->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspm->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
+
+
 											</ul>
 										</div>
 									</div>
@@ -539,9 +546,13 @@ Trang chủ - Phuc Store
 										</div>
 										<div class="add-actions">
 											<ul class="add-actions-link">
-												<li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspkm->id}})">Thêm giỏ hàng</a></li>
-												<li><a class="links-details" href="javascript:void(0)" onclick="themSpYeuThich({{$tbspkm->id}})"><i class="fa fa-heart-o"></i></a></li>
-												<li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#xemnhanhsanpham{{$tbspkm->id}}"><i class="fa fa-eye"></i></a></li>
+                                                @if ($tbspkm->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspkm->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
+
+
 											</ul>
 										</div>
 									</div>
@@ -622,9 +633,11 @@ Trang chủ - Phuc Store
 										</div>
 										<div class="add-actions">
 											<ul class="add-actions-link">
-												<li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspbc->id}})">Thêm giỏ hàng</a></li>
-												<li><a class="links-details" href="javascript:void(0)" onclick="themSpYeuThich({{$tbspbc->id}})"><i class="fa fa-heart-o"></i></a></li>
-												<li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#xemnhanhsanpham{{$tbspbc->id}}"><i class="fa fa-eye"></i></a></li>
+                                                @if ($tbspbc->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$tbspbc->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
 											</ul>
 										</div>
 									</div>

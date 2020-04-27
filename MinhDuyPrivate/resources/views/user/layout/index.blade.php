@@ -317,6 +317,14 @@
             });
             return false;
         }
+        function hethang(){
+        Lobibox.notify('error', {
+                        size: 'mini',
+                        msg: `Sản phẩm này đã tạm thời hết hàng`,
+                        delay: 2000,
+                        position: "top right"
+        });
+    }
    </script>
 </body>
 

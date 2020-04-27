@@ -78,8 +78,13 @@ Sản phẩm - Phuc Store
 										<div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
 									</div>
 								</div>
-								<input name="id_sp" value="{{$san_pham->id}}" hidden>
-								<button class="add-to-cart" type="button" onclick="themCoSoLuong()">Thêm vào giỏ hàng</button>
+                                <input name="id_sp" value="{{$san_pham->id}}" hidden>
+                                @if ($san_pham->so_luong == 0)
+                                <button class="add-to-cart button-sold" type="button">Hết hàng</button>
+                                @else
+                                <button class="add-to-cart" type="button" onclick="themCoSoLuong()">Thêm vào giỏ hàng</button>
+                                @endif
+
 							</form>
 						</div>
 						<div class="block-reassurance">
@@ -296,9 +301,12 @@ Sản phẩm - Phuc Store
 									</div>
 									<div class="add-actions">
 										<ul class="add-actions-link">
-											<li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$spcl->id}})">Thêm giỏ hàng</a></li>
-											<li><a class="links-details" href="javascript:void(0)" onclick="themSpYeuThich({{$spcl->id}})"><i class="fa fa-heart-o"></i></a></li>
-											<li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#xemnhanhsanpham{{$spcl->id}}"><i class="fa fa-eye"></i></a></li>
+											@if ($spcl->so_luong == 0)
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="hethang()">Hết hàng</a></li>
+                                                @else
+                                                <li class="add-cart active"><a href="javascript:void(0)" onclick="themGioHang({{$spcl->id}})">Thêm giỏ hàng</a></li>
+                                                @endif
+
 										</ul>
 									</div>
 								</div>

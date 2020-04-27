@@ -11,10 +11,6 @@
 */
 // --------------- NGƯỜI DÙNG --------------- //
 
-Route::get('test',function(){
-    return view('user.pages.forum');
-});
-
 Route::group(['prefix'=>''] , function(){
     Route::get('', function () {
         return redirect()->route('trangchinh');
@@ -68,11 +64,6 @@ Route::group(['prefix'=>''] , function(){
     Route::get('ajax_quan_huyen/{id_tinh_tp}','User\GioHangController@getQuanHuyen');
     Route::get('ajax_xa_phuong/{id_quan_huyen}','User\GioHangController@getXaPhuong');
     Route::post('thanh-toan.html','User\GioHangController@getThanhToan');
-    // Xử lý sản phẩm yêu thích
-    Route::get('them-yeu-thich/{id_san_pham}','User\SanPhamYeuThichController@themSanPhamYeuThich');
-    Route::get('danh-sach-yeu-thich.html','User\SanPhamYeuThichController@getDanhSachYeuThich');
-    Route::get('huy-yeu-thich.html','User\SanPhamYeuThichController@getHuySachYeuThich');
-    Route::get('xoa-mot-yeu-thich/{id_san_pham}','User\SanPhamYeuThichController@getXoaMotYeuThich');
     // Quản lý tin tức
     Route::get('toan-bo-tin-tuc.html','User\DanhMucTinTucController@getToanBoTinTuc');
     Route::get('danh-muc-tin-tuc/{tenkhongdau}a{id}.html','User\DanhMucTinTucController@getDanhMucTinTuc');
@@ -246,11 +237,6 @@ Route::group(['prefix'=>'quantri','middleware'=>'check.login.admin'] , function(
         Route::post('hotro/xoanhieu','Admin\HoTroController@multiDestroy');
         Route::post('hotro/changeiswatched','Admin\HoTroController@changeIsWatched');
         Route::post('hotro/changeisread','Admin\HoTroController@changeIsRead');
-        // Route::post('changekhoa','Admin\NguoiDungController@updateKhoa');
-        // Route::get('them','Admin\NguoiDungController@create');
-        // Route::post('them','Admin\NguoiDungController@store');
-        // Route::get('chinhsua/{id}','Admin\NguoiDungController@edit');
-        // Route::post('chinhsua/{id}','Admin\NguoiDungController@update');
         Route::get('giaidapthacmac','Admin\HoTroController@getGiaiDapThacMac');
         Route::post('giaidapthacmac/them','Admin\HoTroController@storeGiaiDapThacMac');
         Route::get('giaidapthacmac/chinhsua/{id}','Admin\HoTroController@editGiaiDapThacMac');
@@ -260,23 +246,12 @@ Route::group(['prefix'=>'quantri','middleware'=>'check.login.admin'] , function(
 
     Route::group(['prefix'=>'nguoidung'] , function(){
         Route::get('danhsach','Admin\NguoiDungController@index');
-        // Route::get('danhsach/{column}/{sort}','Admin\NguoiDungController@orderBy');
         Route::post('changekhoa','Admin\NguoiDungController@updateKhoa');
-        // Route::get('them','Admin\NguoiDungController@create');
-        // Route::post('them','Admin\NguoiDungController@store');
-        // Route::get('chinhsua/{id}','Admin\NguoiDungController@edit');
-        // Route::post('chinhsua/{id}','Admin\NguoiDungController@update');
         Route::get('xoa/{id}','Admin\NguoiDungController@destroy');
     });
 
     Route::group(['prefix'=>'quantrivien'] , function(){
         Route::get('danhsach','Admin\QuanTriVienController@index');
-        // Route::get('danhsach/{column}/{sort}','Admin\QuanTriVienController@orderBy');
-        // Route::get('them','Admin\QuanTriVienController@create');
-        // Route::post('them','Admin\QuanTriVienController@store');
-        // Route::get('chinhsua/{id}','Admin\QuanTriVienController@edit');
-        // Route::post('chinhsua/{id}','Admin\QuanTriVienController@update');
-        // Route::get('xoa/{id}','Admin\QuanTriVienController@destroy');
     });
 
     Route::get('loi404','Admin\AdminController@loi404');
