@@ -32,7 +32,7 @@
 		}
         #mr-sort-asc .btn, #mr-sort-desc {
             padding: 2px 8px;
-             margin-top: 0px; 
+             margin-top: 0px;
         }
         @media (min-width: 768px){
 			.modal-dialog.content-hdchitiet {
@@ -56,7 +56,7 @@
 		}
     </style>
 @endsection
- 
+
 @section('admin_content')
         <div class="breadcome-area">
             <div class="container-fluid">
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        
+
          <!-- Loading Start -->
         <div class="data-table-area mg-b-15" id="show-loading">
             <div class="container-fluid">
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="col-md-6 class-display-none">
                                             <div class="dropdown keep-open btn-group" id="mr-sort-asc">
-                                                <button class="btn btn-default dropdown-toggle" title="Sắp xếp tăng" type="button" data-toggle="dropdown"><i class="fa fa-arrow-up" aria-hidden="true"></i> 
+                                                <button class="btn btn-default dropdown-toggle" title="Sắp xếp tăng" type="button" data-toggle="dropdown"><i class="fa fa-arrow-up" aria-hidden="true"></i>
                                                 <span class="caret"></span></button>
                                                 <ul class="dropdown-menu animated zoomIn">
                                                   <li role="menuitem"><a href="javascript:void(0)" onclick="orderByData('id', 'ASC')">ID </a></li>
@@ -143,13 +143,7 @@
                             </div>
                             <div class="sparkline13-graph">
                                 <div class="datatable-dashv1-list custom-datatable-overright">
-                                    <div id="toolbar">
-                                        <select class="form-control dt-tb">
-                                            <option value="">In trang hiện tại</option>
-                                            <option value="all">In tất cả các trang</option>
-                                            <option value="selected">In theo tùy chọn</option>
-                                        </select>
-                                    </div>
+
                                     <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" data-unique-id="id">
                                         <thead>
                                             <tr>

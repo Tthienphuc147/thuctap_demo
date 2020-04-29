@@ -88,17 +88,6 @@
                                 <li><a title="Cài đặt tin tức" href="quantri/caidat/dichvu"><span class="mini-sub-pro">Dịch vụ</span></a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Demo </span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Notifications" href="quantri/trangchu"><span class="mini-sub-pro">Trang chủ</span></a></li>
-                                <li><a title="Notifications" href="quantri/_danhsach"><span class="mini-sub-pro">Danh sách</span></a></li>
-                                <li><a title="Notifications" href="quantri/_tinyMCE"><span class="mini-sub-pro">TinyMCE</span></a></li>
-                                <li><a title="Notifications" href="quantri/_form1"><span class="mini-sub-pro">Form1</span></a></li>
-                                <li><a title="Notifications" href="quantri/_formUpload"><span class="mini-sub-pro">Form Upload</span></a></li>
-                                <li><a title="Notifications" href="quantri/_duallist"><span class="mini-sub-pro">Dual-List</span></a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </nav>
             </div>

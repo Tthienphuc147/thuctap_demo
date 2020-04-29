@@ -56,19 +56,7 @@
 
             if (!$export.length) {
                 $export = $([
-                    '<div class="export btn-group">',
-                        '<button class="btn' +
-                            sprintf(' btn-%s', this.options.buttonsClass) +
-                            sprintf(' btn-%s', this.options.iconSize) +
-                            ' dropdown-toggle" aria-label="export type" ' +
-                            'title="' + this.options.formatExport() + '" ' +
-                            'data-toggle="dropdown" type="button">',
-                            sprintf('<i class="%s %s"></i> ', this.options.iconsPrefix, this.options.icons.export),
-                            '<span class="caret"></span>',
-                        '</button>',
-                        '<ul class="dropdown-menu" role="menu">',
-                        '</ul>',
-                    '</div>'].join('')).appendTo($btnGroup);
+                    ''].join('')).appendTo($btnGroup);
 
                 var $menu = $export.find('.dropdown-menu'),
                     exportTypes = this.options.exportTypes;

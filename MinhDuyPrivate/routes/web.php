@@ -260,23 +260,6 @@ Route::group(['prefix'=>'quantri','middleware'=>'check.login.admin'] , function(
     Route::get('', function () {
         return redirect()->route('trangchu');
     });
-
-    Route::get('_urlthanthien/{ten}_{id}', 'DemoController@urlthanthien')->name('url.thanthien');
-
-    Route::get('_danhsach','DemoController@index');
-    Route::get('_tinyMCE','DemoController@tinyMCE');
-    Route::get('_form1','DemoController@form1');
-    Route::get('_formUpload','DemoController@formUpload');
-
-    Route::get('_demoproduct','DemoController@demoproduct');
-
-    Route::get('_demoformadd','DemoController@demoadd');
-    Route::get('_duallist','DemoController@duallist');
-    Route::get('_demolink/{ndloai}a{id_loai}c{id}','DemoController@demolink');
-
-    Route::get('_democount','DemoController@democount');
-    Route::get('_demoauth','DemoController@demoauth');
-
     Route::get('dangxuat','Admin\DangNhapController@getLogoutAdmin');
 
 });

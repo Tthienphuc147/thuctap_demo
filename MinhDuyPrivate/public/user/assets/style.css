@@ -5245,7 +5245,8 @@ span.required {
 	padding: 15px;
 }
 .li-review-product img {
-	border: 1px solid #ebebeb;
+    border: 1px solid #ebebeb;
+    width: 100%;
 }
 .li-review-product-desc {
 	line-height: 18px;

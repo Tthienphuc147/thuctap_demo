@@ -16,7 +16,7 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        
+
         /*jssor slider bullet skin 05 css*/
         .jssorb050 {cursor:default;position:relative;top:0px;left:0px;width:350px;height:350px;overflow:hidden;}
         /*jssor slider bullet skin 053 css*/
@@ -26,7 +26,7 @@
         .jssorb053 .i:hover .b {fill-opacity:.7;}
         .jssorb053 .iav .b {fill-opacity: 1;}
         .jssorb053 .i.idn {opacity:.3;}
-        
+
         /*jssor slider arrow skin 093 css*/
         .jssora093 {display:block;position:absolute;cursor:pointer;}
         .jssora093 .c {fill:none;stroke:#fff;stroke-width:400;stroke-miterlimit:10;}
@@ -64,7 +64,7 @@
         }
   </style>
 @endsection
- 
+
 @section('admin_content')
         <div class="breadcome-area">
             <div class="container-fluid">
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        
+
          <!-- Loading Start -->
         <div class="data-table-area mg-b-15" id="show-loading">
             <div class="container-fluid">
@@ -254,13 +254,7 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="sparkline13-graph">
                                 <div class="datatable-dashv1-list custom-datatable-overright">
-                                    <div id="toolbar">
-                                        <select class="form-control dt-tb">
-                                            <option value="">In trang hiện tại</option>
-                                            <option value="all">In tất cả các trang</option>
-                                            <option value="selected">In theo tùy chọn</option>
-                                        </select>
-                                    </div>
+                                    
                                     <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                         <thead>
                                             <tr>
