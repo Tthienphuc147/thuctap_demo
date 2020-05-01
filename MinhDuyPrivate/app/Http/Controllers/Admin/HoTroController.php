@@ -16,6 +16,8 @@ class HoTroController extends Controller
      */
     public function indexDanhSachHoTro()
     {
+        if(request()->session()->get('quyen_ho_tro'))
+        {
         $status = false;
         try {
             // DB::table('ho_tros')
@@ -31,10 +33,13 @@ class HoTroController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? view("admin.pages.chamsockhachhang.danhsachhotro", compact("ho_tro"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
+
     }
 
     /**
@@ -45,6 +50,8 @@ class HoTroController extends Controller
      */
     public function destroyHoTro($id)
     {
+        if(request()->session()->get('quyen_ho_tro'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -56,10 +63,12 @@ class HoTroController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 
     /**
@@ -70,11 +79,13 @@ class HoTroController extends Controller
      */
     public function multiDestroy(Request $request)
     {
+        if(request()->session()->get('quyen_ho_tro'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
             $arr = $request->arrID;
-            for ($i = 0; $i < count($arr); $i++) { 
+            for ($i = 0; $i < count($arr); $i++) {
                 DB::table('ho_tros')
                     ->where('id', $arr[$i])
                     ->delete();
@@ -84,14 +95,18 @@ class HoTroController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     public function changeIsWatched(Request $request)
     {
+        if(request()->session()->get('quyen_ho_tro'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -104,14 +119,18 @@ class HoTroController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     public function changeIsRead(Request $request)
     {
+        if(request()->session()->get('quyen_ho_tro'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -125,13 +144,17 @@ class HoTroController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
-    public function getGiaiDapThacMac(){ 
+    public function getGiaiDapThacMac(){
+        if(request()->session()->get('quyen_giai_dap_thac_mac'))
+        {
         $status = false;
         try {
             $giai_dap = DB::table('giai_dap_thac_macs')
@@ -141,10 +164,12 @@ class HoTroController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? view("admin.pages.chamsockhachhang.giaidapthacmac", compact("giai_dap"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -155,6 +180,8 @@ class HoTroController extends Controller
      */
     public function storeGiaiDapThacMac(Request $request)
     {
+        if(request()->session()->get('quyen_giai_dap_thac_mac'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -182,6 +209,8 @@ class HoTroController extends Controller
             : response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -192,6 +221,8 @@ class HoTroController extends Controller
      */
     public function editGiaiDapThacMac($id)
     {
+        if(request()->session()->get('quyen_giai_dap_thac_mac'))
+        {
         $status = false;
         try {
             $giai_dap_thac_mac = DB::table('giai_dap_thac_macs')
@@ -209,6 +240,8 @@ class HoTroController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -220,6 +253,8 @@ class HoTroController extends Controller
      */
     public function updateGiaiDapThacMac(Request $request, $id)
     {
+        if(request()->session()->get('quyen_giai_dap_thac_mac'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -236,7 +271,7 @@ class HoTroController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -245,8 +280,9 @@ class HoTroController extends Controller
                 ])
             : response()->json([
                     'status' => $status
-                ]);
-    }
+                ]); }
+                return view('admin.pages.error403');
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -256,6 +292,8 @@ class HoTroController extends Controller
      */
     public function destroyGiaiDapThacMac($id)
     {
+        if(request()->session()->get('quyen_giai_dap_thac_mac'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -271,5 +309,7 @@ class HoTroController extends Controller
         return response()->json([
             'status' => $status
         ]);
+    }
+        return view('admin.pages.error403');
     }
 }

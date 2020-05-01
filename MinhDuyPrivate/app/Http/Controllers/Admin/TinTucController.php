@@ -16,6 +16,8 @@ class TinTucController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         try {
             $tin_tuc = DB::table('tin_tucs')
@@ -35,6 +37,8 @@ class TinTucController extends Controller
         return $status
             ? view("admin.pages.tintuc.danhsach", compact("tin_tuc"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -44,6 +48,8 @@ class TinTucController extends Controller
      */
     public function create()
     {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         try {
             $danh_muc_tin_tuc = DB::table('danh_muc_tin_tucs')
@@ -55,6 +61,8 @@ class TinTucController extends Controller
         return $status
             ? view("admin.pages.tintuc.them", compact('danh_muc_tin_tuc'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -64,6 +72,8 @@ class TinTucController extends Controller
      */
     public function changeDanhMuc(Request $request)
     {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         try {
             $loai_tin_tuc = DB::table('loai_tin_tucs')
@@ -82,6 +92,8 @@ class TinTucController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -92,6 +104,8 @@ class TinTucController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -117,10 +131,12 @@ class TinTucController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? redirect('quantri/tintuc/danhsach')->with('thongbaothemthanhcong', "a")
             : redirect('quantri/tintuc/danhsach')->with('thongbaothemthatbai', "a");
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -130,7 +146,9 @@ class TinTucController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {        
+    {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
        $status = false;
         try {
             $danh_muc_tin_tuc = DB::table('danh_muc_tin_tucs')->get();
@@ -161,6 +179,8 @@ class TinTucController extends Controller
         return $status
             ? view("admin.pages.tintuc.chinhsua", compact('danh_muc_tin_tuc', 'tin_tuc', 'loai_tin_tuc'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -171,7 +191,9 @@ class TinTucController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -183,7 +205,7 @@ class TinTucController extends Controller
                     ->hinh_anh;
                 $file_path = public_path("uploads/images/news/".$anh_cu);
                 if(File::exists($file_path)){
-                    File::delete($file_path); 
+                    File::delete($file_path);
                 }
                 $imageName = time().$request->file->getClientOriginalName();
                 $request->file->move(public_path('uploads/images/news/'), $imageName);
@@ -216,10 +238,12 @@ class TinTucController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? redirect('quantri/tintuc/danhsach')->with('thongbaosuathanhcong', "a")
             : redirect('quantri/tintuc/danhsach')->with('thongbaosuathatbai', "a");
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -230,6 +254,8 @@ class TinTucController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -240,7 +266,7 @@ class TinTucController extends Controller
                     ->hinh_anh;
             $file_path = public_path("uploads/images/news/".$hinh_anh);
             if(File::exists($file_path)){
-                File::delete($file_path); 
+                File::delete($file_path);
             }
             DB::table('tin_tucs')
                 ->where('id', $id)
@@ -250,10 +276,12 @@ class TinTucController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 
     /**
@@ -264,11 +292,13 @@ class TinTucController extends Controller
      */
     public function multiDestroy(Request $request)
     {
+        if(request()->session()->get('quyen_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
             $arr = $request->arrID;
-            for ($i = 0; $i < count($arr); $i++) { 
+            for ($i = 0; $i < count($arr); $i++) {
                 $hinh_anh = DB::table('tin_tucs')
                     ->where('id', $arr[$i])
                     ->select('hinh_anh')
@@ -276,7 +306,7 @@ class TinTucController extends Controller
                     ->hinh_anh;
                 $file_path = public_path("uploads/images/news/".$hinh_anh);
                 if(File::exists($file_path)){
-                    File::delete($file_path); 
+                    File::delete($file_path);
                 }
                 DB::table('tin_tucs')
                     ->where('id', $arr[$i])
@@ -287,9 +317,11 @@ class TinTucController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

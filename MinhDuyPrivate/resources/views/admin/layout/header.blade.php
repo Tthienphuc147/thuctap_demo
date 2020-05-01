@@ -42,7 +42,7 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                            <img src="/admin/image/avata.png" alt="" />
+                                                            <img src="/admin/image/{{Auth::guard('admin')->user()->avatar}}" alt="" />
                                                              @if(Auth::guard('admin')->check())
                                                         <span class="admin-name">{{Auth::guard('admin')->user()->display_name}}</span>
                                                         @endif

@@ -16,6 +16,8 @@ class CaiDatController extends Controller
      */
     public function indexSanPham()
     {
+        if(request()->session()->get('quyen_cai_dat_san_pham'))
+        {
         $status = false;
         try {
             $cai_dat_san_pham = DB::table('cai_dat_san_phams')
@@ -24,10 +26,12 @@ class CaiDatController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? view("admin.pages.caidat.sanpham", compact("cai_dat_san_pham"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -38,6 +42,8 @@ class CaiDatController extends Controller
      */
     public function updateSanPham(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -62,6 +68,8 @@ class CaiDatController extends Controller
         return response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -72,6 +80,8 @@ class CaiDatController extends Controller
      */
     public function addTuKhoaSanPham(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -86,7 +96,7 @@ class CaiDatController extends Controller
                         'tu_khoa' => $cai_dat_san_pham->tu_khoa . trim($request->tu_khoa). ',',
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
-            }                
+            }
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -98,6 +108,8 @@ class CaiDatController extends Controller
                 'str_tu_khoa' => $cai_dat_san_pham->tu_khoa . ',' . trim($request->tu_khoa),
                 'check_str' => $check_str,
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -108,6 +120,8 @@ class CaiDatController extends Controller
      */
     public function deleteTuKhoaSanPham(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -122,7 +136,7 @@ class CaiDatController extends Controller
                     ]);
             } else {
                 $check_str = false;
-            }                
+            }
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -135,6 +149,9 @@ class CaiDatController extends Controller
                 'str_tu_khoa' => str_replace(trim($request->tu_khoa) . ',', '', $cai_dat_san_pham->tu_khoa),
                 'check_str' => $check_str,
             ]);
+        }
+        return view('admin.pages.error403');
+
     }
 
     /**
@@ -144,6 +161,8 @@ class CaiDatController extends Controller
      */
     public function indexTinTuc()
     {
+        if(request()->session()->get('quyen_cai_dat_tin_tuc'))
+        {
         $status = false;
         try {
             $cai_dat_tin_tuc = DB::table('cai_dat_tin_tucs')
@@ -156,6 +175,8 @@ class CaiDatController extends Controller
         return $status
             ? view("admin.pages.caidat.tintuc", compact("cai_dat_tin_tuc"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -166,6 +187,8 @@ class CaiDatController extends Controller
      */
     public function updateTinTuc(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_tin_tuc'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -186,6 +209,8 @@ class CaiDatController extends Controller
         return response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
      /**
@@ -196,6 +221,8 @@ class CaiDatController extends Controller
      */
     public function addTuKhoaTinTuc(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_tin_tuc'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -210,7 +237,7 @@ class CaiDatController extends Controller
                         'tu_khoa' => $cai_dat_tin_tuc->tu_khoa . trim($request->tu_khoa). ',',
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
-            }                
+            }
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -222,6 +249,9 @@ class CaiDatController extends Controller
                 'str_tu_khoa' => $cai_dat_tin_tuc->tu_khoa . ',' . trim($request->tu_khoa),
                 'check_str' => $check_str,
             ]);
+        }
+        return view('admin.pages.error403');
+
     }
 
      /**
@@ -232,6 +262,8 @@ class CaiDatController extends Controller
      */
     public function deleteTuKhoaTinTuc(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_tin_tuc'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -246,7 +278,7 @@ class CaiDatController extends Controller
                     ]);
             } else {
                 $check_str = false;
-            }                
+            }
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -259,6 +291,8 @@ class CaiDatController extends Controller
                 'str_tu_khoa' => str_replace(trim($request->tu_khoa) . ',', '', $cai_dat_tin_tuc->tu_khoa),
                 'check_str' => $check_str,
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -268,6 +302,8 @@ class CaiDatController extends Controller
      */
     public function indexDichVu()
     {
+        if(request()->session()->get('quyen_cai_dat_dich_vu'))
+        {
         $status = false;
         try {
             $cai_dat_dich_vu = DB::table('cai_dat_dich_vus')
@@ -280,6 +316,8 @@ class CaiDatController extends Controller
         return $status
             ? view("admin.pages.caidat.dichvu", compact("cai_dat_dich_vu"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -290,6 +328,8 @@ class CaiDatController extends Controller
      */
     public function updateDichVu(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_dich_vu'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -310,6 +350,8 @@ class CaiDatController extends Controller
         return response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
      /**
@@ -320,6 +362,8 @@ class CaiDatController extends Controller
      */
     public function addTuKhoaDichVu(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_dich_vu'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -334,7 +378,7 @@ class CaiDatController extends Controller
                         'tu_khoa' => $cai_dat_dich_vu->tu_khoa . trim($request->tu_khoa). ',',
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
-            }                
+            }
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -346,6 +390,8 @@ class CaiDatController extends Controller
                 'str_tu_khoa' => $cai_dat_dich_vu->tu_khoa . ',' . trim($request->tu_khoa),
                 'check_str' => $check_str,
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
      /**
@@ -356,6 +402,8 @@ class CaiDatController extends Controller
      */
     public function deleteTuKhoaDichVu(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_dich_vu'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -370,7 +418,7 @@ class CaiDatController extends Controller
                     ]);
             } else {
                 $check_str = false;
-            }                
+            }
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -383,6 +431,8 @@ class CaiDatController extends Controller
                 'str_tu_khoa' => str_replace(trim($request->tu_khoa) . ',', '', $cai_dat_dich_vu->tu_khoa),
                 'check_str' => $check_str,
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -392,6 +442,8 @@ class CaiDatController extends Controller
      */
     public function indexTrangChu()
     {
+        if(request()->session()->get('quyen_cai_dat_trang_chu'))
+        {
         $status = false;
         try {
             $cai_dat_trang_chu = DB::table('cai_dat_trang_chus')
@@ -400,10 +452,12 @@ class CaiDatController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? view("admin.pages.caidat.trangchu", compact("cai_dat_trang_chu"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -414,6 +468,8 @@ class CaiDatController extends Controller
      */
     public function updateTrangChu(Request $request)
     {
+        if(request()->session()->get('quyen_cai_dat_trang_chu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -425,7 +481,7 @@ class CaiDatController extends Controller
                         ->logo;
                 $file_path = public_path("uploads/images/logo/".$img_old);
                 if(File::exists($file_path)){
-                    File::delete($file_path); 
+                    File::delete($file_path);
                 }
                 $imageName = time().$request->logo->getClientOriginalName();
                 $request->logo->move(public_path('uploads/images/logo/'), $imageName);
@@ -473,5 +529,7 @@ class CaiDatController extends Controller
         return response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 }

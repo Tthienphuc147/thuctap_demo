@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB, Exception;
 
-class HoaDonController extends Controller
+class KhoHangController extends Controller
 {
     /**
      * Hiển thị danh sách hóa đơn.
@@ -15,24 +15,13 @@ class HoaDonController extends Controller
      */
     public function index()
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         try {
-            $hoa_don = DB::table('hoa_dons')
-                ->join('provinces', 'hoa_dons.province_id', 'provinces.province_id')
-                ->join('districts', 'hoa_dons.district_id', 'districts.district_id')
-                ->join('wards', 'hoa_dons.ward_id', 'wards.ward_id')
+            $kho_hang = DB::table('san_phams')
                 ->select([
-                    'hoa_dons.*',
-                    'provinces.name as provinces_name',
-                    'provinces.type as provinces_type',
-                    'districts.name as districts_name',
-                    'districts.type as districts_type',
-                    'wards.name as wards_name',
-                    'wards.type as wards_type',
+                    'san_phams.*',
                 ])
-                ->where('hoa_dons.is_delete', false)
+                ->where('san_phams.is_delete', false)
                 ->orderBy('id', 'DESC')
                 ->get();
             $status = true;
@@ -41,10 +30,8 @@ class HoaDonController extends Controller
         }
 
         return $status
-            ? view("admin.pages.hoadon.danhsach", compact("hoa_don"))
+            ? view("admin.pages.khohang.danhsach", compact("kho_hang"))
             : redirect('quantri/loi404');
-        }
-        return view('admin.pages.error403');
     }
 
     /**
@@ -76,8 +63,6 @@ class HoaDonController extends Controller
      */
     public function changeProvince($province_id)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         try {
             $districts = DB::table('districts')
@@ -95,15 +80,11 @@ class HoaDonController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
-            }
-            return view('admin.pages.error403');
 
     }
 
     public function changeDistrict($district_id)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         try {
             $wards = DB::table('wards')
@@ -121,8 +102,6 @@ class HoaDonController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
-            }
-            return view('admin.pages.error403');
 
     }
 
@@ -145,8 +124,6 @@ class HoaDonController extends Controller
      */
     public function edit($id)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         try {
             $hoa_don = DB::table('hoa_dons')
@@ -177,8 +154,6 @@ class HoaDonController extends Controller
             : response()->json([
                 'status' => $status
             ]);
-        }
-        return view('admin.pages.error403');
     }
 
     /**
@@ -190,8 +165,6 @@ class HoaDonController extends Controller
      */
     public function update(Request $request)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -240,14 +213,10 @@ class HoaDonController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
-            }
-            return view('admin.pages.error403');
     }
 
     public function updatePhiShip(Request $request)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -269,13 +238,9 @@ class HoaDonController extends Controller
             'status' => $status,
         ]);
     }
-    return view('admin.pages.error403');
-    }
 
     public function updateTrangThaiDenDatHang(Request $request)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -297,13 +262,9 @@ class HoaDonController extends Controller
             'status' => $status,
         ]);
     }
-    return view('admin.pages.error403');
-    }
 
     public function updateTrangThaiDenDaThanhToan(Request $request)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -324,13 +285,9 @@ class HoaDonController extends Controller
             'status' => $status,
         ]);
     }
-    return view('admin.pages.error403');
-    }
 
     public function updateTrangThaiDenHuyDonHang(Request $request)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -351,8 +308,6 @@ class HoaDonController extends Controller
             'status' => $status,
         ]);
     }
-    return view('admin.pages.error403');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -362,8 +317,6 @@ class HoaDonController extends Controller
      */
     public function destroy($id)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -383,8 +336,6 @@ class HoaDonController extends Controller
             'status' => $status
         ]);
     }
-    return view('admin.pages.error403');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -394,8 +345,6 @@ class HoaDonController extends Controller
      */
     public function multiDestroy(Request $request)
     {
-        if(request()->session()->get('quyen_danh_sach_hoa_don'))
-        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -417,7 +366,5 @@ class HoaDonController extends Controller
         return response()->json([
             'status' => $status
         ]);
-    }
-    return view('admin.pages.error403');
     }
 }

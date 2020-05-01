@@ -150,6 +150,10 @@ Route::group(['prefix'=>'quantri','middleware'=>'check.login.admin'] , function(
         Route::post('xoanhieu','Admin\HoaDonController@multiDestroy');
     });
 
+    Route::group(['prefix'=>'khohang'] , function(){
+        Route::get('danhsach','Admin\KhoHangController@index');
+    });
+
     Route::group(['prefix'=>'chitiethoadon'] , function(){
         // Hiển thị trong modal trang danh sách hóa đơn
         Route::post('danhsachtheoidhoadon','Admin\ChiTietHoaDonController@indexWithIDHoaDon');
@@ -252,9 +256,17 @@ Route::group(['prefix'=>'quantri','middleware'=>'check.login.admin'] , function(
 
     Route::group(['prefix'=>'quantrivien'] , function(){
         Route::get('danhsach','Admin\QuanTriVienController@index');
+        Route::get('them','Admin\QuanTriVienController@create');
+        Route::post('them','Admin\QuanTriVienController@store');
+        Route::get('xoa/{id}','Admin\QuanTriVienController@destroy');
+        Route::get('chinhsua/{id}','Admin\QuanTriVienController@edit');
+        Route::post('chinhsua/{id}','Admin\QuanTriVienController@update');
+        Route::get('phanquyen/{id}','Admin\QuanTriVienController@getPermission');
+        Route::post('phanquyen/{id}','Admin\QuanTriVienController@updatePermission');
     });
 
     Route::get('loi404','Admin\AdminController@loi404');
+    Route::get('loi403','Admin\AdminController@loi403');
     Route::get('trangchu','Admin\AdminController@trangchu')->name('trangchu');
 
     Route::get('', function () {

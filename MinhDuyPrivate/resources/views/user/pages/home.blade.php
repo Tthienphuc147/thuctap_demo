@@ -35,196 +35,34 @@ Trang chủ - Phuc Store
 <div id="hidden-loading">
 
 	<!-- Begin Slider With Category Menu Area -->
-	<div class="slider-with-banner">
-		<div class="container">
-			<div class="row">
-				<!-- Begin Category Menu Area -->
-				<div class="col-lg-3">
-					<!--Category Menu Start-->
-					<div class="category-menu">
-						<div class="category-heading">
-							<h2 class="categories-toggle"><span>Danh mục sản phẩm</span></h2>
-						</div>
-						<div id="cate-toggle" class="category-menu-list">
-							<ul>
-								<?php
-								$dem = 0;
-								$hien_thi_sp = '';
-								?>
-								@if(count($all_share_loai_san_pham_rand) != 0)
-								@foreach($all_share_loai_san_pham_rand as $aslspr)
-								@if($dem > 12)
-								@break
-								@endif
-								@if($dem < 8)
-								<li class="right-menu"><a href="loai-san-pham/{{changeTitle($aslspr->ten)}}-a{{$aslspr->id}}.html">{{$aslspr->ten}}</a>
-
-									<ul class="cat-mega-menu">
-										@if(count($all_share_san_pham) != 0)
-										<?php $max_sp = 0; $cs_max = -1; ?>
-										<li class="right-menu cat-mega-title">
-											<ul>
-												@foreach($all_share_san_pham as $assp)
-													@if($assp->id_loai_sp == $aslspr->id)
-														@if($max_sp < 15)
-
-															<li><a href="san-pham/{{changeTitle($assp->ten)}}-a{{$assp->id}}.html">{{$assp->ten}}</a></li>
-
-														<?php $max_sp++; ?>
-														@else
-															<?php $cs_max = $assp->id; ?>
-															@break
-														@endif
-													@endif
-												@endforeach
-											</ul>
-										</li>
-										@if($cs_max != -1)
-											<?php $max_sp = 0; ?>
-											<li class="right-menu cat-mega-title">
-												<ul>
-													@foreach($all_share_san_pham as $assp)
-														@if($assp->id_loai_sp == $aslspr->id)
-															@if($max_sp < 15)
-																@if($assp->id >= $cs_max)
-																	<li><a href="san-pham/{{changeTitle($assp->ten)}}-a{{$assp->id}}.html">{{$assp->ten}}</a></li>
-																<?php $max_sp++; ?>
-																@endif
-															@else
-																<?php $cs_max = $assp->id; ?>
-																@break
-															@endif
-														@endif
-													@endforeach
-												</ul>
-											</li>
-										@endif
-
-										@if($cs_max != -1)
-											<?php $max_sp = 0; ?>
-											<li class="right-menu cat-mega-title">
-												<ul>
-													@foreach($all_share_san_pham as $assp)
-														@if($assp->id_loai_sp == $aslspr->id)
-															@if($max_sp < 15)
-																@if($assp->id >= $cs_max)
-																	<li><a href="san-pham/{{changeTitle($assp->ten)}}-a{{$assp->id}}.html">{{$assp->ten}}</a></li>
-																<?php $max_sp++; ?>
-																@endif
-															@else
-																<?php $cs_max = $assp->id; ?>
-																@break
-															@endif
-														@endif
-													@endforeach
-												</ul>
-											</li>
-										@endif
-
-
-										@if($cs_max != -1)
-											<?php $max_sp = 0; ?>
-											<li class="right-menu cat-mega-title">
-												<ul>
-													@foreach($all_share_san_pham as $assp)
-														@if($assp->id_loai_sp == $aslspr->id)
-															@if($max_sp < 15)
-																@if($assp->id >= $cs_max)
-																	<li><a href="san-pham/{{changeTitle($assp->ten)}}-a{{$assp->id}}.html">{{$assp->ten}}</a></li>
-																<?php $max_sp++; ?>
-																@endif
-															@else
-																<?php $cs_max = $assp->id; ?>
-																@break
-															@endif
-														@endif
-													@endforeach
-												</ul>
-											</li>
-										@endif
-
-										@if($cs_max != -1)
-											<?php $max_sp = 0; ?>
-											<li class="right-menu cat-mega-title">
-												<ul>
-													@foreach($all_share_san_pham as $assp)
-														@if($assp->id_loai_sp == $aslspr->id)
-															@if($max_sp < 15)
-																@if($assp->id >= $cs_max)
-																	<li><a href="san-pham/{{changeTitle($assp->ten)}}-a{{$assp->id}}.html">{{$assp->ten}}</a></li>
-																<?php $max_sp++; ?>
-																@endif
-															@else
-																<?php $cs_max = $assp->id; ?>
-																@break
-															@endif
-														@endif
-													@endforeach
-												</ul>
-											</li>
-										@endif
-
-										@endif
-									</ul>
-
-
-
-								</li>
-								@else
-								<li class="rx-child"><a href="loai-san-pham/{{changeTitle($aslspr->ten)}}-a{{$aslspr->id}}.html">{{$aslspr->ten}}</a></li>
-								@endif
-								<?php $dem++; ?>
-								@endforeach
-								@endif
-								<li class="rx-parent">
-									<a class="rx-default">Xem nhiều hơn</a>
-									<a class="rx-show">Xem ít hơn</a>
-								</li>
-
-							</ul>
-						</div>
-					</div>
-					<!--Category Menu End-->
-				</div>
-				<!-- Category Menu Area End Here -->
-				<!-- Begin Slider Area -->
-				<div class="col-lg-9">
-					<div class="slider-area pt-sm-30 pt-xs-30">
-						<div class="slider-active owl-carousel">
-							<!-- Begin Single Slide Area -->
-							<div class="single-slide align-center-left animation-style-02 bg-4">
-								<img src="/user/assets/images/banner/banner_1.webp">
-								<div class="slider-progress"></div>
-								<div class="slider-content">
-								</div>
+    <div class="slider-with-banner">
+        <div class="container">
+            <div class="row">
+                <!-- Begin Slider Area -->
+                <div class="col-lg-12 col-md-12">
+                    <div class="slider-area">
+                        <div class="slider-active owl-carousel">
+                            <!-- Begin Single Slide Area -->
+                            <div class="single-slide align-center-left  animation-style-01 bg-1">
+                                <div class="slider-progress"></div>
                             </div>
-                            <div class="single-slide align-center-left animation-style-02 bg-4">
-								<img src="/user/assets/images/banner/banner_2.jpg">
-								<div class="slider-progress"></div>
-								<div class="slider-content">
-								</div>
+                            <!-- Single Slide Area End Here -->
+                            <!-- Begin Single Slide Area -->
+                            <div class="single-slide align-center-left animation-style-02 bg-2">
+                                <div class="slider-progress"></div>
                             </div>
-                            <div class="single-slide align-center-left animation-style-02 bg-4">
-								<img src="/user/assets/images/banner/banner_3.jpg">
-								<div class="slider-progress"></div>
-								<div class="slider-content">
-								</div>
+                            <!-- Single Slide Area End Here -->
+                            <!-- Begin Single Slide Area -->
+                            <div class="single-slide align-center-left animation-style-01 bg-3">
+                                <div class="slider-progress"></div>
                             </div>
-                            <div class="single-slide align-center-left animation-style-02 bg-4">
-								<img src="/user/assets/images/banner/banner_4.jpg">
-								<div class="slider-progress"></div>
-								<div class="slider-content">
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-				</div>
-				<!-- Slider Area End Here -->
-			</div>
-		</div>
-	</div>
+                            <!-- Single Slide Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<!-- Slider With Category Menu Area End Here -->
 
 	<!-- Begin Li's Static Banner Area -->

@@ -14,6 +14,8 @@ class DanhMucTinTucController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_danh_muc_tin_tuc'))
+        {
         $status = false;
         try {
             $danh_muc_tin_tuc = DB::table('danh_muc_tin_tucs')
@@ -23,10 +25,13 @@ class DanhMucTinTucController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? view("admin.pages.danhmuctintuc.danhsach", compact("danh_muc_tin_tuc"))
             : redirect('quantri/loi404');
+        }
+            return view('admin.pages.error403');
+
     }
 
     /**
@@ -37,6 +42,8 @@ class DanhMucTinTucController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_danh_muc_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -54,13 +61,15 @@ class DanhMucTinTucController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return response()->json([
             'status' => $status,
             'danh_muc_tin_tuc' => $danh_muc_tin_tuc
-        ]);
+        ]);}
+        return view('admin.pages.error403');
+
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -69,6 +78,8 @@ class DanhMucTinTucController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_danh_muc_tin_tuc'))
+        {
         $status = false;
         try {
             $danh_muc_tin_tuc = DB::table('danh_muc_tin_tucs')
@@ -86,6 +97,9 @@ class DanhMucTinTucController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+                return view('admin.pages.error403');
+
     }
 
     /**
@@ -97,6 +111,8 @@ class DanhMucTinTucController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_danh_muc_tin_tuc'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -112,7 +128,7 @@ class DanhMucTinTucController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -121,6 +137,9 @@ class DanhMucTinTucController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+                return view('admin.pages.error403');
+
     }
 
     /**
@@ -131,6 +150,8 @@ class DanhMucTinTucController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_danh_muc_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -146,5 +167,8 @@ class DanhMucTinTucController extends Controller
         return response()->json([
             'status' => $status
         ]);
+    }
+        return view('admin.pages.error403');
+
     }
 }

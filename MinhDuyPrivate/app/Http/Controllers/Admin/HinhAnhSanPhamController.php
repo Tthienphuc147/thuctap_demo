@@ -18,6 +18,8 @@ class HinhAnhSanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -26,7 +28,7 @@ class HinhAnhSanPhamController extends Controller
                     ->where('id_sp', $request->id)
                     ->where('hinh_chinh', true)
                     ->count();
-                
+
                 foreach ($request->images as $img) {
                     $imageName = time().$img->getClientOriginalName();
                     $img->move(public_path('uploads/images/products/'), $imageName);
@@ -47,7 +49,7 @@ class HinhAnhSanPhamController extends Controller
                                 'created_at' => date("Y-m-d")
                             ]);
                     }
-                    
+
                 }
             }
 
@@ -64,11 +66,15 @@ class HinhAnhSanPhamController extends Controller
         return response()->json([
             'status' => $status,
             'hinh_anh' => $hinh_anh,
-        ]);    
+        ]);
+    }
+    return view('admin.pages.error403');
     }
 
     public function changeHinhChinh(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -93,6 +99,8 @@ class HinhAnhSanPhamController extends Controller
             'id' => $request->id
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -102,6 +110,8 @@ class HinhAnhSanPhamController extends Controller
      */
     public function destroy($id_sp, $id)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -112,7 +122,7 @@ class HinhAnhSanPhamController extends Controller
                     ->ten;
             $file_path = public_path("uploads/images/products/".$ha);
             if(File::exists($file_path)){
-                File::delete($file_path); 
+                File::delete($file_path);
             }
             $status = DB::table('hinh_anh_san_phams')
                 ->where('id', $id)
@@ -121,7 +131,7 @@ class HinhAnhSanPhamController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         $hinh_anh = DB::table('hinh_anh_san_phams')
             ->where('id_sp', $id_sp)
             ->get();
@@ -130,5 +140,7 @@ class HinhAnhSanPhamController extends Controller
             'id_sp' => $id_sp,
             'hinh_anh' => $hinh_anh
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

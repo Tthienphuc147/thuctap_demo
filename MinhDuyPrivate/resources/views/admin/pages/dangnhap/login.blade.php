@@ -56,11 +56,11 @@
 								<input maxlength="30" id="mat_khau" name="mat_khau" type="password" placeholder="Nhập vào mật khẩu" required="" value="" name="password" id="password" class="form-control">
 								<span class="help-block small error" id="error_pass"></span>
 							</div>
-							<div id="checkbox-rmb" class="checkbox login-checkbox">
+							{{-- <div id="checkbox-rmb" class="checkbox login-checkbox">
 								<label><input name="ghi_nho" type="checkbox" class="i-checks"> Ghi nhớ tài khoản</label>
-							</div>
+							</div> --}}
 							<button type="button" id="loginbtn" class="btn btn-success btn-block loginbtn">Đăng nhập</button>
-							<a class="btn btn-default btn-block" href="#">Quên tài khoản</a>
+							{{-- <a class="btn btn-default btn-block" href="#">Quên tài khoản</a> --}}
 						</form>
 					</div>
 				</div>

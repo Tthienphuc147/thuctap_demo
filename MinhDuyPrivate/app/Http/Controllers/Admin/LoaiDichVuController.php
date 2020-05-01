@@ -15,12 +15,14 @@ class LoaiDichVuController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_loai_dich_vu'))
+        {
         $status = false;
         try {
             $loai_dich_vu = DB::table('loai_dich_vus')
                 ->join('danh_muc_dich_vus', 'id_danh_muc_dich_vu', 'danh_muc_dich_vus.id')
                 ->select(
-                    'loai_dich_vus.*', 
+                    'loai_dich_vus.*',
                     'danh_muc_dich_vus.ten as ten_danh_muc'
                 )
                 ->orderBy('loai_dich_vus.id', 'ASC')
@@ -34,6 +36,8 @@ class LoaiDichVuController extends Controller
         return $status
             ? view("admin.pages.loaidichvu.danhsach", compact('loai_dich_vu', 'danh_muc_dich_vu'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -44,6 +48,8 @@ class LoaiDichVuController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_loai_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -57,7 +63,7 @@ class LoaiDichVuController extends Controller
             $loai_dich_vu = DB::table('loai_dich_vus')
                 ->join('danh_muc_dich_vus', 'id_danh_muc_dich_vu', 'danh_muc_dich_vus.id')
                 ->select([
-                    'loai_dich_vus.*', 
+                    'loai_dich_vus.*',
                     'danh_muc_dich_vus.ten as ten_danh_muc'
                 ])
                 ->where('loai_dich_vus.id', $id)
@@ -74,6 +80,8 @@ class LoaiDichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -84,6 +92,8 @@ class LoaiDichVuController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_loai_dich_vu'))
+        {
         $status = false;
         try {
             $danh_muc_dich_vu = DB::table('danh_muc_dich_vus')
@@ -105,6 +115,8 @@ class LoaiDichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -116,6 +128,8 @@ class LoaiDichVuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_loai_dich_vu'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -135,7 +149,7 @@ class LoaiDichVuController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -145,6 +159,8 @@ class LoaiDichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -155,6 +171,8 @@ class LoaiDichVuController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_loai_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -169,6 +187,7 @@ class LoaiDichVuController extends Controller
         }
         return response()->json([
             'status' => $status
-        ]);
+        ]);  }
+        return view('admin.pages.error403');
     }
 }

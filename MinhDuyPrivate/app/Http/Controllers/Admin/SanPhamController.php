@@ -15,6 +15,8 @@ class SanPhamController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         try {
             $san_pham = DB::table('san_phams')
@@ -36,6 +38,8 @@ class SanPhamController extends Controller
         return $status
             ? view("admin.pages.sanpham.danhsach", compact("san_pham", 'hinh_anh_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -46,6 +50,8 @@ class SanPhamController extends Controller
      */
     public function orderBy($column, $order_by)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         try {
             $san_pham = DB::table('san_phams')
@@ -68,6 +74,8 @@ class SanPhamController extends Controller
         return $status
             ? view("admin.pages.sanpham.danhsach", compact("san_pham", 'hinh_anh_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -77,6 +85,8 @@ class SanPhamController extends Controller
      */
     public function create()
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         try {
             $danh_muc_sp = DB::table('danh_muc_san_phams')
@@ -89,6 +99,8 @@ class SanPhamController extends Controller
         return $status
             ? view("admin.pages.sanpham.them", compact('danh_muc_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -98,6 +110,8 @@ class SanPhamController extends Controller
      */
     public function changeDanhMuc(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $str = "";
         try {
             $loai_sp = DB::table('loai_san_phams')
@@ -114,6 +128,8 @@ class SanPhamController extends Controller
         }
         return $str;
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * Thêm 1 sản phẩm mới (bắt ajax khi submit form thêm sản phẩm).
@@ -123,6 +139,8 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         DB::beginTransaction();
         $status = false; $id = 0;
         try {
@@ -154,6 +172,8 @@ class SanPhamController extends Controller
             'id' => $id
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * Hiển thị thông tin của 1 sản phẩm.
@@ -163,6 +183,8 @@ class SanPhamController extends Controller
      */
     public function show($id)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         try {
             $san_pham = DB::table('san_phams')
@@ -189,6 +211,8 @@ class SanPhamController extends Controller
         return $status
             ? view('admin.pages.sanpham.xem', compact('san_pham', 'hinh_anh_sp', 'phan_hoi_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -199,6 +223,8 @@ class SanPhamController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         try {
             $danh_muc_sp = DB::table('danh_muc_san_phams')
@@ -243,6 +269,8 @@ class SanPhamController extends Controller
         return $status
             ? view('admin.pages.sanpham.chinhsua', compact('san_pham', 'hinh_anh_sp', 'danh_muc_sp', 'danh_muc_sp_hien_tai', 'loai_sp_hien_tai', 'phan_hoi_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -254,6 +282,8 @@ class SanPhamController extends Controller
      */
     public function update(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -284,6 +314,8 @@ class SanPhamController extends Controller
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * [Sự kiện bắt ajax để cập nhật cột thông số cho sản phẩm trong trang thêm sản phẩm và sửa sản phẩm]
@@ -292,6 +324,8 @@ class SanPhamController extends Controller
      */
     public function updateThongSo(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -312,6 +346,8 @@ class SanPhamController extends Controller
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
     /**
      * [Sự kiện bắt ajax để cập nhật cột thông tin chi tiết cho sản phẩm trong trang thêm sản phẩm và sửa sản phẩm]
      * @param  Request $request [id, thong_tin_chi_tiet]
@@ -319,6 +355,8 @@ class SanPhamController extends Controller
      */
     public function updateThongTinChiTiet(Request $request)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -339,6 +377,8 @@ class SanPhamController extends Controller
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * [Bắt ajax click vào checkbox thay đổi cột "moi" trang danh sách sản phẩm]
@@ -346,6 +386,8 @@ class SanPhamController extends Controller
      * @return [boolean]           [$status]
      */
     public function updateMoi(Request $request){
+        if(request()->session()->get('quyen_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -370,6 +412,8 @@ class SanPhamController extends Controller
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * [Bắt ajax click vào checkbox thay đổi cột "noi_bat" trang danh sách sản phẩm]
@@ -377,6 +421,8 @@ class SanPhamController extends Controller
      * @return [boolean]           [$status]
      */
     public function updateNoiBat(Request $request){
+        if(request()->session()->get('quyen_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -401,6 +447,8 @@ class SanPhamController extends Controller
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * [Bắt ajax click vào checkbox thay đổi cột "ban_chay" trang danh sách sản phẩm]
@@ -408,6 +456,8 @@ class SanPhamController extends Controller
      * @return [boolean]           [$status]
      */
     public function updateBanChay(Request $request){
+        if(request()->session()->get('quyen_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -432,6 +482,8 @@ class SanPhamController extends Controller
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * Xóa 1 sản phẩm.
@@ -441,6 +493,8 @@ class SanPhamController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -464,5 +518,7 @@ class SanPhamController extends Controller
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

@@ -15,7 +15,8 @@ class PhanHoiSanPhamController extends Controller
      */
     public function index()
     {
-
+        if(request()->session()->get('quyen_phan_hoi_san_pham'))
+        {
         $status = false;
         try {
             $loai_sp = DB::table('danh_muc_san_phams')
@@ -27,8 +28,8 @@ class PhanHoiSanPhamController extends Controller
                 ->select(
                     'danh_muc_san_phams.id as danhmucid',
                     'loai_san_phams.id as loaiid',
-                    'loai_san_phams.ten as loaiten', 
-                    'danh_muc_san_phams.ten as danhmucten' 
+                    'loai_san_phams.ten as loaiten',
+                    'danh_muc_san_phams.ten as danhmucten'
                 )
                 ->distinct()
                 ->orderBy('loai_san_phams.id', 'ASC')
@@ -41,12 +42,12 @@ class PhanHoiSanPhamController extends Controller
                     ->where('san_phams.is_delete', false)
                     ->where('loai_san_phams.id', $loai_sp[0]->loaiid)
                     ->select(
-                        'loai_san_phams.id as loaiid', 
-                        'san_phams.id as spid', 
-                        'phan_hoi_san_phams.id as phanhoiid', 
-                        'loai_san_phams.ten as loaiten', 
+                        'loai_san_phams.id as loaiid',
+                        'san_phams.id as spid',
+                        'phan_hoi_san_phams.id as phanhoiid',
+                        'loai_san_phams.ten as loaiten',
                         'san_phams.ten as spten',
-                        'phan_hoi_san_phams.ten_hien_thi', 
+                        'phan_hoi_san_phams.ten_hien_thi',
                         'phan_hoi_san_phams.email',
                         'phan_hoi_san_phams.noi_dung',
                         'phan_hoi_san_phams.duyet',
@@ -56,7 +57,7 @@ class PhanHoiSanPhamController extends Controller
                     ->orderBy('phan_hoi_san_phams.id', 'ASC')
                     ->get();
             }
-           
+
             $status = true;
         } catch (Exception $e) {
             $status = false;
@@ -65,6 +66,8 @@ class PhanHoiSanPhamController extends Controller
         return $status
             ? view("admin.pages.phanhoisanpham.danhsach", compact("phan_hoi_sp", 'loai_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -98,7 +101,7 @@ class PhanHoiSanPhamController extends Controller
     {
         //
     }
-    
+
     /**
      * Xem danh sách phản hồi theo id sản phẩm
      *
@@ -107,6 +110,8 @@ class PhanHoiSanPhamController extends Controller
      */
     public function showTheoSanPham($idsp)
     {
+        if(request()->session()->get('quyen_phan_hoi_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -140,14 +145,16 @@ class PhanHoiSanPhamController extends Controller
         } catch (Exception $e) {
             $status = false;
             DB::rollback();
-        }        
-        return $status 
+        }
+        return $status
             ? view('admin.pages.phanhoisanpham.xem', compact('san_pham', 'phan_hoi_sp', 'hinh_anh_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
-     * Bắt sự kiện ajax thay đổi danh sách phản hồi khi click vào loại sản phẩm trang 
+     * Bắt sự kiện ajax thay đổi danh sách phản hồi khi click vào loại sản phẩm trang
      * quantri/phanhoisanpham/danhsach
      *
      * @param  int  $idloai
@@ -155,6 +162,8 @@ class PhanHoiSanPhamController extends Controller
      */
     public function changePhanHoi(Request $request)
     {
+        if(request()->session()->get('quyen_phan_hoi_san_pham'))
+        {
         $status = false;
         try {
             $phan_hoi_sp = DB::table('loai_san_phams')
@@ -164,12 +173,12 @@ class PhanHoiSanPhamController extends Controller
                 ->where('san_phams.is_delete', false)
                 ->where('loai_san_phams.id', $request->loaiid)
                 ->select(
-                    'loai_san_phams.id as loaiid', 
-                    'san_phams.id as spid', 
-                    'phan_hoi_san_phams.id as phanhoiid', 
-                    'loai_san_phams.ten as loaiten', 
+                    'loai_san_phams.id as loaiid',
+                    'san_phams.id as spid',
+                    'phan_hoi_san_phams.id as phanhoiid',
+                    'loai_san_phams.ten as loaiten',
                     'san_phams.ten as spten',
-                    'phan_hoi_san_phams.ten_hien_thi', 
+                    'phan_hoi_san_phams.ten_hien_thi',
                     'phan_hoi_san_phams.email',
                     'phan_hoi_san_phams.noi_dung',
                     'phan_hoi_san_phams.duyet'
@@ -178,7 +187,7 @@ class PhanHoiSanPhamController extends Controller
                 ->orderBy('san_phams.id', 'ASC')
                 ->orderBy('phan_hoi_san_phams.id', 'ASC')
                 ->get();
-           
+
             $status = true;
         } catch (Exception $e) {
             $status = false;
@@ -192,6 +201,8 @@ class PhanHoiSanPhamController extends Controller
             : response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
 
@@ -201,9 +212,11 @@ class PhanHoiSanPhamController extends Controller
      * @return [type]           [description]
      */
     function updateDuyet(Request $request){
+        if(request()->session()->get('quyen_phan_hoi_san_pham'))
+        {
         $status = false;
         $duyet = filter_var((string)$request->duyet, FILTER_VALIDATE_BOOLEAN)? true : false;
-        DB::beginTransaction(); 
+        DB::beginTransaction();
         try {
             DB::table('phan_hoi_san_phams')
                 ->where('id', $request->id)
@@ -222,6 +235,8 @@ class PhanHoiSanPhamController extends Controller
             'status' => $status,
             'duyet' => !$duyet
         ]);
+    }
+    return view('admin.pages.error403');
     }
 
     /**
@@ -255,6 +270,8 @@ class PhanHoiSanPhamController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_phan_hoi_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -266,9 +283,11 @@ class PhanHoiSanPhamController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status,
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

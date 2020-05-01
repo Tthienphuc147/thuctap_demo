@@ -15,13 +15,15 @@ class LoaiSanPhamController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_loai_san_pham'))
+        {
         $status = false;
         try {
             $loai_sp = DB::table('loai_san_phams')
                 ->join('danh_muc_san_phams', 'id_danh_muc_sp', 'danh_muc_san_phams.id')
                 ->where('loai_san_phams.is_delete', false)
                 ->select(
-                    'loai_san_phams.*', 
+                    'loai_san_phams.*',
                     'danh_muc_san_phams.ten as ten_danh_muc'
                 )
                 ->orderBy('loai_san_phams.id', 'ASC')
@@ -36,6 +38,8 @@ class LoaiSanPhamController extends Controller
         return $status
             ? view("admin.pages.loaisanpham.danhsach", compact("loai_sp", 'danh_muc_sp'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -46,6 +50,8 @@ class LoaiSanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_loai_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -60,7 +66,7 @@ class LoaiSanPhamController extends Controller
                 ->join('danh_muc_san_phams', 'id_danh_muc_sp', 'danh_muc_san_phams.id')
                 ->where('loai_san_phams.is_delete', false)
                 ->select([
-                    'loai_san_phams.*', 
+                    'loai_san_phams.*',
                     'danh_muc_san_phams.ten as ten_danh_muc'
                 ])
                 ->where('loai_san_phams.id', $id)
@@ -77,6 +83,8 @@ class LoaiSanPhamController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -87,6 +95,8 @@ class LoaiSanPhamController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_loai_san_pham'))
+        {
         $status = false;
         try {
             $danh_muc_san_pham = DB::table('danh_muc_san_phams')
@@ -110,6 +120,8 @@ class LoaiSanPhamController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -121,6 +133,8 @@ class LoaiSanPhamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_loai_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -140,7 +154,7 @@ class LoaiSanPhamController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -150,6 +164,8 @@ class LoaiSanPhamController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -160,6 +176,8 @@ class LoaiSanPhamController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_loai_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
 
@@ -188,9 +206,11 @@ class LoaiSanPhamController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

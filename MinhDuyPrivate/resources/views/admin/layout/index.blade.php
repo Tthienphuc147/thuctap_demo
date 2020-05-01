@@ -62,6 +62,12 @@
         alertify.success("Chỉnh sửa dữ liệu thành công!")
     </script>
     @endif
+    @if (session('thongbaosuaquyenthanhcong'))
+    <script>
+        alertify.set('notifier','position', 'buttom-right');
+        alertify.success("Cập nhật quyền cho nhân viên thành công!")
+    </script>
+    @endif
     <!-- script trả về khi Chỉnh sửa thất bại -->
     @if (session('thongbaosuathatbai'))
     <script>

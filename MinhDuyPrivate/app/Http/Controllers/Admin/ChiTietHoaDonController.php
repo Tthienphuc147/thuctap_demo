@@ -35,7 +35,7 @@ class ChiTietHoaDonController extends Controller
                 ->where('chi_tiet_hoa_dons.is_delete', false)
                 ->where('hoa_dons.is_delete', false)
                 ->select([
-                    'chi_tiet_hoa_dons.*', 
+                    'chi_tiet_hoa_dons.*',
                     'hoa_dons.ma_hoa_don',
                     'hoa_dons.trang_thai',
                     'san_phams.ten as spten',
@@ -44,7 +44,7 @@ class ChiTietHoaDonController extends Controller
                 ->orderBy('chi_tiet_hoa_dons.id', 'ASC')
                 ->get();
             if(count($chi_tiet_hoa_don)){
-                for ($i=0; $i < count($chi_tiet_hoa_don); $i++) { 
+                for ($i=0; $i < count($chi_tiet_hoa_don); $i++) {
                     $hinh_anh = DB::table('hinh_anh_san_phams')
                         ->where('hinh_anh_san_phams.is_delete', false)
                         ->where('hinh_anh_san_phams.id_sp', $chi_tiet_hoa_don[$i]->id_sp)
@@ -60,7 +60,7 @@ class ChiTietHoaDonController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                 'status' => $status,
@@ -78,6 +78,8 @@ class ChiTietHoaDonController extends Controller
      */
     public function create()
     {
+        if(request()->session()->get('quyen_danh_sach_hoa_don'))
+        {
         $status = false;
         try {
             $san_pham = DB::table('san_phams')
@@ -101,6 +103,8 @@ class ChiTietHoaDonController extends Controller
             : response()->json([
                     'status' => $status,
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -111,6 +115,8 @@ class ChiTietHoaDonController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_danh_sach_hoa_don'))
+        {
         $status = false;
         $hinh_anh_sp = array();
         DB::beginTransaction();
@@ -130,7 +136,7 @@ class ChiTietHoaDonController extends Controller
                 ->where('chi_tiet_hoa_dons.is_delete', false)
                 ->where('hoa_dons.is_delete', false)
                 ->select([
-                    'chi_tiet_hoa_dons.*', 
+                    'chi_tiet_hoa_dons.*',
                     'hoa_dons.ma_hoa_don',
                     'hoa_dons.trang_thai',
                     'san_phams.ten as spten',
@@ -139,7 +145,7 @@ class ChiTietHoaDonController extends Controller
                 ->orderBy('chi_tiet_hoa_dons.id', 'ASC')
                 ->get();
             if(count($chi_tiet_hoa_don)){
-                for ($i=0; $i < count($chi_tiet_hoa_don); $i++) { 
+                for ($i=0; $i < count($chi_tiet_hoa_don); $i++) {
                     $hinh_anh = DB::table('hinh_anh_san_phams')
                         ->where('hinh_anh_san_phams.is_delete', false)
                         ->where('hinh_anh_san_phams.id_sp', $chi_tiet_hoa_don[$i]->id_sp)
@@ -164,7 +170,7 @@ class ChiTietHoaDonController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                 'status' => $status,
@@ -174,6 +180,8 @@ class ChiTietHoaDonController extends Controller
             : response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -213,6 +221,8 @@ class ChiTietHoaDonController extends Controller
 
     public function updateSoLuong(Request $request)
     {
+        if(request()->session()->get('quyen_danh_sach_hoa_don'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -237,7 +247,7 @@ class ChiTietHoaDonController extends Controller
             $status = false;
             DB::rollback();
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -248,6 +258,8 @@ class ChiTietHoaDonController extends Controller
             'status' => $status,
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -257,6 +269,8 @@ class ChiTietHoaDonController extends Controller
      */
     public function destroy($id_hoa_don, $id)
     {
+        if(request()->session()->get('quyen_danh_sach_hoa_don'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -287,5 +301,7 @@ class ChiTietHoaDonController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 }

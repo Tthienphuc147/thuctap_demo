@@ -15,6 +15,8 @@ class DanhMucDichVuController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_danh_muc_dich_vu'))
+        {
         $status = false;
         try {
             $danh_muc_dich_vu = DB::table('danh_muc_dich_vus')
@@ -24,10 +26,12 @@ class DanhMucDichVuController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? view("admin.pages.danhmucdichvu.danhsach", compact("danh_muc_dich_vu"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -36,6 +40,8 @@ class DanhMucDichVuController extends Controller
      */
     public function sum()
     {
+        if(request()->session()->get('quyen_danh_muc_dich_vu'))
+        {
         $status = false;
         try {
             $sum = DB::table('danh_muc_dich_vus')->count();
@@ -43,7 +49,7 @@ class DanhMucDichVuController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -52,6 +58,8 @@ class DanhMucDichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -62,6 +70,8 @@ class DanhMucDichVuController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_danh_muc_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -88,6 +98,8 @@ class DanhMucDichVuController extends Controller
             : response()->json([
                 'status' => $status
             ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -98,6 +110,8 @@ class DanhMucDichVuController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_danh_muc_dich_vu'))
+        {
         $status = false;
         try {
             $danh_muc_dich_vu = DB::table('danh_muc_dich_vus')
@@ -115,6 +129,8 @@ class DanhMucDichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -126,6 +142,8 @@ class DanhMucDichVuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_danh_muc_dich_vu'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -141,7 +159,7 @@ class DanhMucDichVuController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -150,6 +168,8 @@ class DanhMucDichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -160,6 +180,8 @@ class DanhMucDichVuController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_danh_muc_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -175,5 +197,7 @@ class DanhMucDichVuController extends Controller
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

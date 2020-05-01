@@ -15,20 +15,25 @@ class DanhMucSanPhamController extends Controller
      */
     public function index()
     {
-        $status = false;
-        try {
-            $danh_muc_sp = DB::table('danh_muc_san_phams')
-                ->where('is_delete', false)
-                ->orderBy('id', 'ASC')
-                ->get();
-            $status = true;
-        } catch (Exception $e) {
+        if(request()->session()->get('quyen_danh_muc_san_pham'))
+        {
             $status = false;
+            try {
+                $danh_muc_sp = DB::table('danh_muc_san_phams')
+                    ->where('is_delete', false)
+                    ->orderBy('id', 'ASC')
+                    ->get();
+                $status = true;
+            } catch (Exception $e) {
+                $status = false;
+            }
+
+            return $status
+                ? view("admin.pages.danhmucsanpham.danhsach", compact("danh_muc_sp"))
+                : redirect('quantri/loi404');
         }
-        
-        return $status
-            ? view("admin.pages.danhmucsanpham.danhsach", compact("danh_muc_sp"))
-            : redirect('quantri/loi404');
+        return view('admin.pages.error403');
+
     }
 
     /**
@@ -37,6 +42,8 @@ class DanhMucSanPhamController extends Controller
      */
     public function sum()
     {
+        if(request()->session()->get('quyen_danh_muc_san_pham'))
+        {
         $status = false;
         try {
             $sum = DB::table('danh_muc_san_phams')
@@ -46,7 +53,7 @@ class DanhMucSanPhamController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -55,6 +62,8 @@ class DanhMucSanPhamController extends Controller
             : response()->json([
                     'status' => $status,
                 ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -64,6 +73,8 @@ class DanhMucSanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_danh_muc_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -81,11 +92,13 @@ class DanhMucSanPhamController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return response()->json([
             'status' => $status,
             'danh_muc_san_pham' => $danh_muc_san_pham
         ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -96,6 +109,8 @@ class DanhMucSanPhamController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_danh_muc_san_pham'))
+        {
         $status = false;
         try {
             $danh_muc_sp = DB::table('danh_muc_san_phams')
@@ -106,7 +121,7 @@ class DanhMucSanPhamController extends Controller
         } catch (Exception $e) {
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -115,6 +130,8 @@ class DanhMucSanPhamController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -126,6 +143,8 @@ class DanhMucSanPhamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_danh_muc_san_pham'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -141,7 +160,7 @@ class DanhMucSanPhamController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -150,6 +169,9 @@ class DanhMucSanPhamController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -160,6 +182,8 @@ class DanhMucSanPhamController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_danh_muc_san_pham'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -189,7 +213,7 @@ class DanhMucSanPhamController extends Controller
                 ->update([
                     'hinh_anh_san_phams.is_delete' => true,
                 ]);
-            
+
             DB::commit();
             $status = true;
         } catch (Exception $e) {
@@ -199,5 +223,7 @@ class DanhMucSanPhamController extends Controller
         return response()->json([
             'status' => $status
         ]);
+        }
+        return view('admin.pages.error403');
     }
 }

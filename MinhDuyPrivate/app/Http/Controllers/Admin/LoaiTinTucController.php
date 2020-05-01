@@ -15,12 +15,14 @@ class LoaiTinTucController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_loai_tin_tuc'))
+        {
         $status = false;
         try {
             $loai_tin_tuc = DB::table('loai_tin_tucs')
                 ->join('danh_muc_tin_tucs', 'id_danh_muc_tin_tuc', 'danh_muc_tin_tucs.id')
                 ->select(
-                    'loai_tin_tucs.*', 
+                    'loai_tin_tucs.*',
                     'danh_muc_tin_tucs.ten as ten_danh_muc'
                 )
                 ->orderBy('loai_tin_tucs.id', 'ASC')
@@ -34,6 +36,8 @@ class LoaiTinTucController extends Controller
         return $status
             ? view("admin.pages.loaitintuc.danhsach", compact('loai_tin_tuc', 'danh_muc_tin_tuc'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -44,6 +48,8 @@ class LoaiTinTucController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_loai_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -57,7 +63,7 @@ class LoaiTinTucController extends Controller
             $loai_tin_tuc = DB::table('loai_tin_tucs')
                 ->join('danh_muc_tin_tucs', 'id_danh_muc_tin_tuc', 'danh_muc_tin_tucs.id')
                 ->select([
-                    'loai_tin_tucs.*', 
+                    'loai_tin_tucs.*',
                     'danh_muc_tin_tucs.ten as ten_danh_muc'
                 ])
                 ->where('loai_tin_tucs.id', $id)
@@ -74,6 +80,8 @@ class LoaiTinTucController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -84,6 +92,8 @@ class LoaiTinTucController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_loai_tin_tuc'))
+        {
         $status = false;
         try {
             $danh_muc_tin_tuc = DB::table('danh_muc_tin_tucs')
@@ -105,6 +115,8 @@ class LoaiTinTucController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -116,6 +128,8 @@ class LoaiTinTucController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_loai_tin_tuc'))
+        {
         DB::beginTransaction();
         $status = false;
         try {
@@ -135,7 +149,7 @@ class LoaiTinTucController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? response()->json([
                     'status' => $status,
@@ -145,6 +159,8 @@ class LoaiTinTucController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+            return view('admin.pages.error403');
     }
 
     /**
@@ -155,6 +171,8 @@ class LoaiTinTucController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_loai_tin_tuc'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -170,5 +188,7 @@ class LoaiTinTucController extends Controller
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

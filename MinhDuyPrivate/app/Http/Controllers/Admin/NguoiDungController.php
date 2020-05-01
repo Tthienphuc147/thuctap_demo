@@ -16,6 +16,8 @@ class NguoiDungController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_nguoi_dung'))
+        {
         $status = false;
         try {
             $nguoi_dung = DB::table('users')
@@ -28,6 +30,8 @@ class NguoiDungController extends Controller
         return $status
             ? view("admin.pages.nguoidung.danhsach", compact("nguoi_dung"))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -94,9 +98,11 @@ class NguoiDungController extends Controller
      */
     public function updateKhoa(Request $request)
     {
+        if(request()->session()->get('quyen_nguoi_dung'))
+        {
         $status = false;
         $locked = filter_var((string)$request->locked, FILTER_VALIDATE_BOOLEAN)? true : false;
-        DB::beginTransaction(); 
+        DB::beginTransaction();
         try {
             DB::table('users')
                 ->where('id', $request->id)
@@ -115,6 +121,8 @@ class NguoiDungController extends Controller
             'locked' => !$locked
         ]);
     }
+    return view('admin.pages.error403');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -124,6 +132,8 @@ class NguoiDungController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_nguoi_dung'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -135,9 +145,11 @@ class NguoiDungController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 }

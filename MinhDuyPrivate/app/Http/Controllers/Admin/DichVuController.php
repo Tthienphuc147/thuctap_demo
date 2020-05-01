@@ -15,6 +15,8 @@ class DichVuController extends Controller
      */
     public function index()
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         try {
             $dich_vu = DB::table('dich_vus')
@@ -32,6 +34,9 @@ class DichVuController extends Controller
         return $status
             ? view("admin.pages.dichvu.danhsach", compact("dich_vu"))
             : redirect('quantri/loi404');
+        }
+            return view('admin.pages.error403');
+
     }
 
     /**
@@ -41,6 +46,8 @@ class DichVuController extends Controller
      */
     public function create()
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         try {
             $danh_muc_dich_vu = DB::table('danh_muc_dich_vus')
@@ -52,6 +59,9 @@ class DichVuController extends Controller
         return $status
             ? view("admin.pages.dichvu.them", compact('danh_muc_dich_vu'))
             : redirect('quantri/loi404');
+        }
+            return view('admin.pages.error403');
+
     }
 
     /**
@@ -61,6 +71,8 @@ class DichVuController extends Controller
      */
     public function changeDanhMuc(Request $request)
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         try {
             $loai_dich_vu = DB::table('loai_dich_vus')
@@ -79,6 +91,9 @@ class DichVuController extends Controller
             : response()->json([
                     'status' => $status
                 ]);
+            }
+                return view('admin.pages.error403');
+
     }
 
     /**
@@ -89,6 +104,8 @@ class DichVuController extends Controller
      */
     public function store(Request $request)
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -113,10 +130,14 @@ class DichVuController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? redirect('quantri/dichvu/danhsach')->with('thongbaothemthanhcong', "a")
             : redirect('quantri/dichvu/danhsach')->with('thongbaothemthatbai', "a");
+        }
+        return view('admin.pages.error403');
+
+
     }
 
     /**
@@ -127,6 +148,8 @@ class DichVuController extends Controller
      */
     public function edit($id)
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         try {
             $danh_muc_dich_vu = DB::table('danh_muc_dich_vus')->get();
@@ -157,6 +180,9 @@ class DichVuController extends Controller
         return $status
             ? view("admin.pages.dichvu.chinhsua", compact('danh_muc_dich_vu', 'dich_vu', 'loai_dich_vu'))
             : redirect('quantri/loi404');
+        }
+        return view('admin.pages.error403');
+
     }
 
     /**
@@ -168,6 +194,8 @@ class DichVuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -179,7 +207,7 @@ class DichVuController extends Controller
                     ->hinh_anh;
                 $file_path = public_path("uploads/images/services/".$anh_cu);
                 if(File::exists($file_path)){
-                    File::delete($file_path); 
+                    File::delete($file_path);
                 }
                 $imageName = time().$request->file->getClientOriginalName();
                 $request->file->move(public_path('uploads/images/services/'), $imageName);
@@ -210,10 +238,12 @@ class DichVuController extends Controller
             DB::rollback();
             $status = false;
         }
-        
+
         return $status
             ? redirect('quantri/dichvu/danhsach')->with('thongbaosuathanhcong', "a")
             : redirect('quantri/dichvu/danhsach')->with('thongbaosuathatbai', "a");
+        }
+        return view('admin.pages.error403');
     }
 
     /**
@@ -224,6 +254,8 @@ class DichVuController extends Controller
      */
     public function destroy($id)
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
@@ -234,7 +266,7 @@ class DichVuController extends Controller
                     ->hinh_anh;
             $file_path = public_path("uploads/images/services/".$hinh_anh);
             if(File::exists($file_path)){
-                File::delete($file_path); 
+                File::delete($file_path);
             }
             DB::table('dich_vus')
                 ->where('id', $id)
@@ -244,10 +276,12 @@ class DichVuController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
+    }
+    return view('admin.pages.error403');
     }
 
     /**
@@ -258,11 +292,13 @@ class DichVuController extends Controller
      */
     public function multiDestroy(Request $request)
     {
+        if(request()->session()->get('quyen_dich_vu'))
+        {
         $status = false;
         DB::beginTransaction();
         try {
             $arr = $request->arrID;
-            for ($i = 0; $i < count($arr); $i++) { 
+            for ($i = 0; $i < count($arr); $i++) {
                 $hinh_anh = DB::table('dich_vus')
                     ->where('id', $arr[$i])
                     ->select('hinh_anh')
@@ -270,7 +306,7 @@ class DichVuController extends Controller
                     ->hinh_anh;
                 $file_path = public_path("uploads/images/services/".$hinh_anh);
                 if(File::exists($file_path)){
-                    File::delete($file_path); 
+                    File::delete($file_path);
                 }
                 DB::table('dich_vus')
                     ->where('id', $arr[$i])
@@ -281,9 +317,12 @@ class DichVuController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $status = false;
-        }        
+        }
         return response()->json([
             'status' => $status
         ]);
     }
+    return view('admin.pages.error403');
+    }
+
 }
