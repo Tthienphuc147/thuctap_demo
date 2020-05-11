@@ -46,9 +46,6 @@ Thông tin tài khoản - Phuc Store
                             <div class="col-md-12">
                                 <button id="sub_form_login" class="register-button mt-0" type="button">Đăng nhập</button>
                             </div>
-                            {{-- <div class="col-md-12">
-                                <button type="button" class="register-button mt-0" id="btn_loginfb" onclick="location.href='dangnhap/facebook'"><i id="btn_loginfb-icon" class="fa fa-facebook"></i> Đăng nhập với Facebook</button>
-                            </div> --}}
                         </div>
                     </div>
                 </form>

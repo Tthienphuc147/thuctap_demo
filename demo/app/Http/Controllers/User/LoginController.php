@@ -22,50 +22,6 @@ class LoginController extends Controller
         return view('user.pages.login_register')->with('back_link', $back_link);
     }
 
-
-    public function checkLoginFacebook(){
-        try {
-            return Socialite::driver('facebook')->redirect();
-        } catch (Exception $e) {
-            return redirect('dang-nhap/#')->with("thongbaoloifb","Đăng nhập Facebook thất bại!");
-        }
-
-    }
-
-    public function changeProfile(){
-        DB::beginTransaction();
-        try {
-            $user = Socialite::driver('facebook')->user();
-            $check_user = DB::table('users')->where('name','=',$user->id)
-            ->orWhere('email','=',$user->email)
-            ->get();
-            if(count($check_user) == 0){
-                $user_model = new User;
-                $user_model->display_name = $user->name;
-                $user_model->name = $user->id;
-                $user_model->role = "fb";
-                $user_model->password = bcrypt($user->id);
-                $time_now = new DateTime();
-                $time_now = $time_now->getTimestamp();
-                $user_model->email = $time_now."us"."@gmail.com";
-                $user_model->save();
-                DB::commit();
-            }
-            if (Auth::guard('web')->attempt(['name' => $user->id, 'password' => $user->id]))
-            {
-                return redirect('trang-chu.html/#');
-            }
-            else{
-                return redirect('dang-nhap/#')->with("thongbaoloifb","Đăng nhập Facebook thất bại!");
-            }
-        } catch (Exception $e) {
-            DB::rollback();
-            return redirect('dang-nhap/#')->with("thongbaoloifb","Đăng nhập Facebook thất bại!");
-        }
-
-
-    }
-
     public function loginUser(Request $request)
     {
         $login = filter_var($request->name, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';

@@ -178,6 +178,8 @@
                                 <li><a href="#phanhoi">Phản hồi</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
+                                {{-- tab thong tin chinh sua --}}
+
                                 <div class="product-tab-list tab-pane fade active in" id="thongtin">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -349,6 +351,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                   {{-- end tab thong tin chinh sua --}}
+                                      {{-- tab thong so chinh sua --}}
                                 <div class="product-tab-list tab-pane fade" id="thongso">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -382,6 +386,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                   {{-- end  tab thong so chinh sua --}}
+                                      {{-- tab thong tin chi tiet chinh sua --}}
                                 <div class="product-tab-list tab-pane fade" id="thongtinchitiet">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -415,6 +421,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                   {{-- tab hinh anh chinh sua --}}
                                 <div class="product-tab-list tab-pane fade" id="hinhanh">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

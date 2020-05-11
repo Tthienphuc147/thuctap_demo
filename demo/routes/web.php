@@ -19,14 +19,12 @@ Route::group(['prefix'=>''] , function(){
     Route::group(['prefix'=>'dang-nhap','middleware'=>'check.login.user'] , function(){
         Route::get('', 'User\LoginController@index');
         Route::post('', 'User\LoginController@loginUser');
-        Route::get('facebook', 'User\LoginController@checkLoginFacebook');
     });
     Route::group(['prefix'=>'dang-ky','middleware'=>'check.login.user'] , function(){
         Route::post('', 'User\LoginController@postDangKyTaiKhoan');
     });
     Route::get('dangxuat', 'User\LoginController@logOutUser');
     // Quản lý tài khoản
-    Route::get('taikhoan', 'User\LoginController@changeProfile');
     Route::get('thong-tin-tai-khoan.html', 'User\LoginController@getThongTinTaiKhoan');
     Route::post('thong-tin-tai-khoan.html', 'User\LoginController@postThongTinTaiKhoan');
     // Xác thực tài khoản
@@ -53,7 +51,6 @@ Route::group(['prefix'=>''] , function(){
     // Xử lý giỏ hàng
     Route::get('them-gio-hang/{id_san_pham}','User\GioHangController@getThemGioHang');
     Route::post('them-gio-hang-co-so-luong','User\GioHangController@postThemGioHangCoSoluong');
-    Route::post('them-gio-hang-co-so-luong-modal','User\GioHangController@postThemGioHangCoSoluongModel');
     Route::get('xoa-mot-gio-hang/{id_san_pham}','User\GioHangController@getXoaMotGioHang');
     Route::get('gio-hang.html','User\GioHangController@getDanhSachGioHang');
     Route::get('huy-gio-hang.html','User\GioHangController@getHuyGioHang');

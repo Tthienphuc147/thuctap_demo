@@ -236,11 +236,11 @@
                                                     <button title="Xóa" class="pd-setting-ed" onclick="deleteID({{$sp->id }});">
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </button>
-                                                    @if(!$sp->gui_mail)
+                                                    {{-- @if(!$sp->gui_mail)
                                                     <button title="Gửi email" class="pd-setting-ed gui-email" onclick="sendMail({{$sp->id }});">
                                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                                     </button>
-                                                    @endif
+                                                    @endif --}}
                                                 </td>
                                             </tr>
                                             @endforeach

@@ -1,0 +1,16 @@
+# MinhDuy
+
+
+- Clone project git clone httpsgithub.comminhduyquangnamMinhDuy.git
+- cd XDPMQLCSDLCodeLaravel
+- composer install
+- Copy .env.example to .envbr
+ Windows copy .env.example .envbr
+ UbuntuCSM cp .env.example .envbr
+- php artisan keygenerate
+- Create database and editting .env
+- php artisan migrate --seed
+- php artisan serve
+- Create new account or login with br
+username  br
+password 
